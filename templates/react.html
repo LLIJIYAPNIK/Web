@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+    <!-- To make the map appear, you must add your apikey -->
+    <script src="https://api-maps.yandex.ru/v3/?apikey=<978bc106-09fd-4aa3-b6bd-40c122f310ea>&lang=en_US" type="text/javascript"></script>
+
+    <script
+      data-plugins="transform-modules-umd"
+      data-presets="react, typescript"
+      type="text/babel"
+      src="./common.ts"
+    ></script>
+    <script data-plugins="transform-modules-umd" data-presets="react, typescript" type="text/babel">
+      import {LOCATION, markerProps} from './common';
+
+      window.map = null;
+
+      main();
+      async function main() {
+        // For each object in the JS API, there is a React counterpart
+        // To use the React version of the API, include the module @yandex/ymaps3-reactify
+        const [ymaps3React] = await Promise.all([ymaps3.import('@yandex/ymaps3-reactify'), ymaps3.ready]);
+        const reactify = ymaps3React.reactify.bindTo(React, ReactDOM);
+        const {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker} = reactify.module(ymaps3);
+
+        function App() {
+          return (
+            // Initialize the map and pass initialization parameters
+            <YMap location={LOCATION} showScaleInCopyrights={true} ref={(x) => (map = x)}>
+              {/* Add a map scheme layer */}
+              <YMapDefaultSchemeLayer />
+              {/* Add a layer of geo objects to display the markers */}
+              <YMapDefaultFeaturesLayer />
+
+              {/* Add markers with a custom icon to the map */}
+              {markerProps.map((markerProp) => (
+                <YMapMarker coordinates={markerProp.coordinates}>
+                  <img src={markerProp.iconSrc} className="icon-marker" onClick={() => alert(markerProp.message)} />
+                </YMapMarker>
+              ))}
+            </YMap>
+          );
+        }
+
+        ReactDOM.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>,
+          document.getElementById('app')
+        );
+      }
+    </script>
+
+    <!-- prettier-ignore -->
+    <style> html, body, #app { width: 100%; height: 100%; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; } .toolbar { position: absolute; z-index: 1000; top: 0; left: 0; display: flex; align-items: center; padding: 16px; } .toolbar a { padding: 16px; }  </style>
+    <link rel="stylesheet" href="./common.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

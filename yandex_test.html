@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Яндекс.Карты - Маршрут по дорогам</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=aacc60e5-7bfe-446c-94f2-7e42e6d4de95&lang=ru_RU"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+    <script>
+        ymaps.ready(() => {
+            const map = new ymaps.Map('map', {
+                center: [55.755826, 37.617633],
+                zoom: 12
+            });
+
+            const startPoint = [55.751984, 37.617313];
+            const endPoint = [55.755826, 37.617633];
+
+            // Создаем маршрут
+            ymaps.route([
+                startPoint,
+                endPoint
+            ], {
+                // Указываем способ передвижения - на автомобиле
+                mapStateAutoApply: true,
+                routingMode: 'auto'
+            }).then(route => {
+                // Добавляем маршрут на карту
+                map.geoObjects.add(route);
+            });
+        });
+    </script>
+</body>
+</html>
