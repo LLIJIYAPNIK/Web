@@ -1,3 +1,5 @@
+from sqlalchemy.orm import sessionmaker
+
 from models import *
 from geopy.distance import geodesic
 from functools import lru_cache

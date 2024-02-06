@@ -1,14 +1,19 @@
 import time
 import requests
 import json
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, Gyms
 
 # API ключ
-api_key = "8a0e4f5f-f02b-4a50-827b-f4f417184124"
+api_key = "dda3ddba-c9ea-4ead-9010-f43fbc15c6e3"
 
 # JSON-строка
 json_data = [
-    'Fitness USSR'
+    'World Class'
 ]
+
+time.sleep(0.1)
 
 # Закодированная JSON-строка
 encoded_data = json.dumps(json_data)
@@ -34,7 +39,7 @@ if response.status_code == 200:
     results = data["features"]
     # Вывод информации о результатах
     for result in results:
-        if 'Москва' in result['properties']['description']:
+        if 'Моск' in result['properties']['description']:
             s = f"Название: {result['properties']['name']} {result['properties']['description']} "
             response_coord = requests.get(
                 f"https://geocode-maps.yandex.ru/1.x/?apikey=978bc106-09fd-4aa3-b6bd-40c122f310ea&geocode={result['properties']['description']}&format=json")
@@ -43,15 +48,12 @@ if response.status_code == 200:
                 # Теперь вы можете получить доступ к полям внутри feature_member
                 coords = [float(coord) for coord in str(feature_member['GeoObject']['Point']['pos']).split()[::-1]]
             print(s)
-            from models import *
-
-            engine = create_engine('sqlite:///database.sqlite')
-
-            # Создаем таблицу, если она не существует
+            engine = create_engine('mysql+mysqlconnector://Sasha:Sasha@localhost/mydb')
             Base.metadata.create_all(engine)
 
             # Создаем сеанс
-            session = sessionmaker(bind=engine)()
+            Session = sessionmaker(bind=engine)
+            session = Session()
 
             # Добавляем пользователя
             user = Gyms(title=f"{result['properties']['name']}", adress=f"{result['properties']['description']}",

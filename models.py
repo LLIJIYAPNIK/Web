@@ -1,9 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float
-
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
-
 
 class Gyms(Base):
     __tablename__ = 'gyms'
@@ -14,9 +12,9 @@ class Gyms(Base):
     x = Column(Float, nullable=False)
     y = Column(Float, nullable=False)
 
-
-engine = create_engine('sqlite:///database.sqlite')
+# Укажите параметры подключения к вашей базе данных MySQL
+# Замените 'mysql+mysqlconnector://username:password@hostname/dbname' на свои реальные данные
+engine = create_engine('mysql+mysqlconnector://Sasha:Sasha@localhost/mydb')
 
 # Создаем таблицу, если она не существует
 Base.metadata.create_all(engine)
-
