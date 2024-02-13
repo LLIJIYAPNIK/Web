@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -12,9 +12,18 @@ class Gyms(Base):
     x = Column(Float, nullable=False)
     y = Column(Float, nullable=False)
 
-# Укажите параметры подключения к вашей базе данных MySQL
-# Замените 'mysql+mysqlconnector://username:password@hostname/dbname' на свои реальные данные
-engine = create_engine('mysql+mysqlconnector://Sasha:Sasha@localhost/mydb')
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), unique=False)
+    last_name = Column(String(50), unique=False)
+    mail = Column(String(50), unique=True)
+    password = Column(String(80), unique=False)
 
-# Создаем таблицу, если она не существует
-Base.metadata.create_all(engine)
+    def __init__(self, name, last_name, mail, password):
+        self.name = name
+        self.last_name = last_name
+        self.mail = mail
+        self.password = password
+
+

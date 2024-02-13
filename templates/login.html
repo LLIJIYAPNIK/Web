@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+</head>
+<body>
+    <h1>Вход</h1>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.mail.label }}<br>
+        {{ form.mail }}<br>
+        {{ form.password.label }}<br>
+        {{ form.password }}<br>
+        {{ form.submit }}
+    </form>
+</body>
+</html>
