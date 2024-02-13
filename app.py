@@ -47,7 +47,7 @@ def get_location():
 
 @app.route("/test_page")
 def test_page():
-    data = get_gyms(latitude_user, longitude_user)
+    data = get_gyms(latitude_user, longitude_user, db)
 
     places = []
     for item in data:
