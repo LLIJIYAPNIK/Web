@@ -44,18 +44,13 @@
             <div class="nav-menu-right">
                 <nav class="mainmenu mobile-menu">
                     <ul>
-                        {% if current_user.is_authenticated %}
-                            <li>
-                                <a href="#">{{ current_user.name }} {{ current_user.last_name }}</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Профиль</a></li>
-                                    <li><a href="#">Корзина</a></li>
-                                    <li><a href="/logout">Выйти</a></li>
-                                </ul>
-                            </li>
-                        {% else %}
-                            <li><a href="/register">Войти</a></li>
-                        {% endif %}
+                        <li><a href="#">{{ user }}</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Профиль</a></li>
+                                <li><a href="#">Корзина</a></li>
+                                <li><a href="/logout">Выйти</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
