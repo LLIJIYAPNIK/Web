@@ -124,5 +124,12 @@ def index_login():
     return render_template('index_login.html', user=user)
 
 
+@app.route('/editor')
+@login_required
+def editor():
+    return render_template('editor.html')
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
