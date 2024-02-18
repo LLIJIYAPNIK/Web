@@ -2,6 +2,7 @@ from models import Gyms
 from geopy.distance import geodesic
 from functools import lru_cache
 
+
 def get_gyms(user_x, user_y, db):
     @lru_cache(maxsize=100)
     def get_distance(start_x, start_y, gym):
