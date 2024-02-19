@@ -9,25 +9,13 @@
     <title>Quill Editor</title>
     <style>
         #editor {
-            height: 1016px;
+            height: 916px;
             background-color: #333c4d;
             color: #aac7ff;
             font-family: "Century Gothic";
-            font-size: 16px;
+            font-size: 32px;
             padding: 10px;
             border: none;
-        }
-
-        .ql-snow .ql-container {
-            border: none; /* Убираем рамку контейнера */
-        }
-
-        .ql-snow .ql-toolbar {
-            border: none; /* Убираем рамку панели инструментов */
-        }
-
-        .ql-snow .ql-editor {
-            border: none; /* Убираем рамку редактора */
         }
 
         body {
@@ -38,6 +26,16 @@
             margin: 0;
             padding: 0;
         }
+
+        #inputField {
+            width: 100%;
+            border: none;
+            background-color: #333c4d;
+            color: #aac7ff;
+            height: 100px;
+            font-size: 48px;
+        }
+
     </style>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -120,11 +118,14 @@
 </div>
 
 <section>
+    <input type="text" id="inputField" placeholder="Название">
+</section>
+
+<section>
     <div id="editor"></div>
     <script>
         let toolbaroptions = [
             ["bold", "italic", "underline", "strike"],
-            [{header: [1, 2, 3, 4, 5, 6, false]}],
             [{list: "ordered"}, {list: "bullet"}],
             [{script: "sub"}, {script: "super"}],
             [{indent: "+1"}, {indent: "-1"}],
