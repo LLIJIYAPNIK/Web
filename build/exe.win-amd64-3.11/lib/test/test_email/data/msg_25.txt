@@ -103,7 +103,7 @@ X-BeenThere: linuxuser@www.linux.org.uk
 X-Mailman-Version: 2.0.3
 Precedence: bulk
 List-Help: <mailto:linuxuser-request@www.linux.org.uk?subject=help>
-List-Post: <mailto:linuxuser@www.linux.org.uk>
+List-Posts: <mailto:linuxuser@www.linux.org.uk>
 List-Subscribe: <http://www.linux.org.uk/mailman/listinfo/linuxuser>,
 	<m
 List-Id: bulletins from LinuxUser magazine <linuxuser.www.linux.org.uk>

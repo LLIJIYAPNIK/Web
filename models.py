@@ -1,11 +1,6 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
-from datetime import datetime
-from sqlalchemy import Column, Integer, String, Float
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 Base = db.Model
@@ -34,13 +29,13 @@ class User(UserMixin, Base):
         return str(self.id)
 
 
-class Post(Base):
+class Posts(Base):
     __tablename__ = 'posts'
-
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    user = relationship("User", backref="posts")
+    user = db.relationship("User", backref="posts")
+

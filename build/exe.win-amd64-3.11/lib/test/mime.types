@@ -243,7 +243,7 @@ application/vnd.3gpp.sms
 application/vnd.3gpp2.bcmcsinfo+xml
 application/vnd.3gpp2.sms			sms
 application/vnd.3gpp2.tcap			tcap
-application/vnd.3M.Post-it-Notes		pwn
+application/vnd.3M.Posts-it-Notes		pwn
 application/vnd.accpac.simply.aso		aso
 application/vnd.accpac.simply.imp		imp
 application/vnd.acucobol			acu

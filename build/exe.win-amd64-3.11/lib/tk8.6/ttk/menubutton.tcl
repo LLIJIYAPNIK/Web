@@ -168,7 +168,7 @@ if {[tk windowingsystem] eq "aqua"} {
 }
 
 # Popdown --
-#	Post the menu and set a grab on the menu.
+#	Posts the menu and set a grab on the menu.
 #
 proc ttk::menubutton::Popdown {mb} {
     if {[$mb instate disabled] || [set menu [$mb cget -menu]] eq ""} {

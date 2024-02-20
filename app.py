@@ -1,12 +1,10 @@
-from datetime import datetime
 from flask_session import Session
 from flask import render_template, request, redirect, url_for, session, flash
 from get_nearst_gym import get_gyms
 from forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from models import User, Post
+from models import User, Posts, db
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 app = Flask(__name__)
@@ -17,12 +15,8 @@ app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'
 app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['SESSION_TYPE'] = 'filesystem'  # Можно выбрать другие типы хранения сессий
 
-db = SQLAlchemy(app)
+db.init_app(app)
 Session(app)
-
-with app.app_context():
-    # Создание всех таблиц
-    db.create_all()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -116,15 +110,12 @@ def register():
         db.session.add(new_user)
         db.session.commit()  # Сохранение изменений в базе данных
 
-
         if new_user.id:
             login_user(new_user)
             session['userID'] = new_user.id
             return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
-
-
 
 
 @app.route('/logout')
@@ -159,17 +150,17 @@ def get_post():
 
     print(userID, title, content)
 
-    new_post = Post(
+    new_post = Posts(
         user_id=userID,
         title=title,
-        content=content,
-        created_at=datetime.now()
+        content=content
     )
 
+    db.session.add(new_post)
+    db.session.commit()
+
     if new_post.id:
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect(url_for('/profile'))
+        return redirect(url_for('profile'))
     return 'Not good'
 
 
@@ -181,4 +172,7 @@ def profile():
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        # Создание всех таблиц
+        db.create_all()
     app.run(debug=True)

@@ -45,7 +45,7 @@ namespace eval ttk::combobox {
 
 ttk::copyBindings TEntry TCombobox
 
-bind TCombobox <Down> 			{ ttk::combobox::Post %W }
+bind TCombobox <Down> 			{ ttk::combobox::Posts %W }
 bind TCombobox <Escape> 		{ ttk::combobox::Unpost %W }
 
 bind TCombobox <Button-1> 		{ ttk::combobox::Press "" %W %x %y }
@@ -130,7 +130,7 @@ proc ttk::combobox::Press {mode w x y} {
 	    default { ttk::entry::Press $w $x }
 	}
     } else {
-	Post $w
+	Posts $w
     }
 }
 
@@ -374,10 +374,10 @@ proc ttk::combobox::PlacePopdown {cb popdown} {
     wm geometry $popdown ${w}x${H}+${x}+${Y}
 }
 
-## Post $cb --
+## Posts $cb --
 #	Pop down the associated listbox.
 #
-proc ttk::combobox::Post {cb} {
+proc ttk::combobox::Posts {cb} {
     # Don't do anything if disabled:
     #
     $cb instate disabled { return }
@@ -397,7 +397,7 @@ proc ttk::combobox::Post {cb} {
 	x11 - win32 { wm transient $popdown [winfo toplevel $cb] }
     }
 
-    # Post the listbox:
+    # Posts the listbox:
     #
     wm attribute $popdown -topmost 1
     wm deiconify $popdown

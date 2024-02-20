@@ -22,7 +22,7 @@ X-BeenThere: scr@socal-raves.org
 X-Mailman-Version: 2.1a3
 Precedence: bulk
 List-Help: <mailto:scr-request@socal-raves.org?subject=help>
-List-Post: <mailto:scr@socal-raves.org>
+List-Posts: <mailto:scr@socal-raves.org>
 List-Subscribe: <http://socal-raves.org/mailman/listinfo/scr>,
 	<mailto:scr-request@socal-raves.org?subject=subscribe>
 List-Id: SoCal-Raves <scr.socal-raves.org>
@@ -103,7 +103,7 @@ X-Converted-To-Plain-Text: Alternative section used was text/plain
 X-BeenThere: scr@socal-raves.org
 X-Mailman-Version: 2.1a3
 List-Help: <mailto:scr-request@socal-raves.org?subject=help>
-List-Post: <mailto:scr@socal-raves.org>
+List-Posts: <mailto:scr@socal-raves.org>
 List-Subscribe: <http://socal-raves.org/mailman/listinfo/scr>,
  <mailto:scr-request@socal-raves.org?subject=subscribe>
 List-Id: SoCal-Raves <scr.socal-raves.org>
