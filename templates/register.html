@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Регистрация</title>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
 </head>
 <body>
-    <h1>Регистрация</h1>
-    <form method="POST">
+    <h1>Registration Form</h1>
+    <form method="POST" action="{{ url_for('register') }}">
         {{ form.hidden_tag() }}
-        {{ form.name.label }}<br>
-        {{ form.name }}<br>
-        {{ form.last_name.label }}<br>
-        {{ form.last_name }}<br>
-        {{ form.mail.label }}<br>
-        {{ form.mail }}<br>
-        {{ form.password.label }}<br>
-        {{ form.password }}<br>
-        {{ form.copy_password.label }}<br>
-        {{ form.copy_password }}<br>
+        {{ form.name.label }} {{ form.name }}
+        {{ form.last_name.label }} {{ form.last_name }}
+        {{ form.mail.label }} {{ form.mail }}
+        {{ form.password.label }} {{ form.password }}
+        {{ form.copy_password.label }} {{ form.copy_password }}
         {{ form.submit }}
     </form>
 </body>

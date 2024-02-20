@@ -10,17 +10,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Войти')
 
 
-class RegisterForm(FlaskForm):
-    name = StringField('Имя', validators=[DataRequired()])
-    last_name = StringField('Фамилия', validators=[DataRequired()])
-    mail = EmailField('Почта', validators=[DataRequired(), Email()])
-    password = PasswordField('Пароль', validators=[
-        DataRequired(),
-        Length(min=8),  # Минимальная длина пароля
-        Regexp(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])', message='Пароль должен содержать хотя бы одну цифру, одну заглавную и строчную букву, а также один специальный символ'),
-    ])
-    copy_password = PasswordField('Повторите пароль', validators=[
-        DataRequired(),
-        EqualTo('password', message='Пароли должны совпадать')
-    ])
-    submit = SubmitField('Зарегистрироваться')
+class RegistrationForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    mail = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    copy_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')

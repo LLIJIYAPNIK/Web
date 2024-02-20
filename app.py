@@ -1,18 +1,28 @@
+from datetime import datetime
+from flask_session import Session
 from flask import render_template, request, redirect, url_for, session, flash
 from get_nearst_gym import get_gyms
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from models import User
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from models import User, Post
+from flask_login import LoginManager, login_user, login_required, logout_user
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'mflkdmklbmkldmaklbsmdrfkoigbhjmnoikmd'
+app.config['SECRET_KEY'] = 'some_key_123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://Sasha:Sasha@localhost/mydb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'
+app.config['SESSION_COOKIE_PATH'] = '/'
+app.config['SESSION_TYPE'] = 'filesystem'  # Можно выбрать другие типы хранения сессий
 
 db = SQLAlchemy(app)
+Session(app)
+
+with app.app_context():
+    # Создание всех таблиц
+    db.create_all()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -76,6 +86,7 @@ def login():
 
         if user and check_password_hash(user.password, password):
             login_user(user)
+            session['userID'] = user.id  # Сохраняем ID пользователя в сессии
             name_last_name = f"{user.name} {user.last_name}"
             return redirect(url_for('index'))
 
@@ -86,13 +97,15 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    form = RegistrationForm()
     if form.validate_on_submit():
+        print('yes')
         hash_and_salted_password = generate_password_hash(
             form.password.data,
             method='pbkdf2:sha256',
             salt_length=8
         )
+
         new_user = User(
             mail=form.mail.data,
             name=form.name.data,
@@ -101,19 +114,24 @@ def register():
         )
 
         db.session.add(new_user)
-        db.session.commit()
+        db.session.commit()  # Сохранение изменений в базе данных
+
 
         if new_user.id:
             login_user(new_user)
+            session['userID'] = new_user.id
             return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
+
+
 
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
+    session.pop('userID', None)
     return redirect(url_for('index'))
 
 
@@ -127,8 +145,39 @@ def index_login():
 @app.route('/editor')
 @login_required
 def editor():
-    return render_template('editor.html')
+    userID = session.get('userID')
+    print(userID)
+    return render_template('editor.html', userID=userID)
 
+
+@app.route('/get_post', methods=['POST'])
+def get_post():
+    data = request.get_json()
+    userID = int(session.get('userID'))
+    title = data['title']
+    content = data['content']
+
+    print(userID, title, content)
+
+    new_post = Post(
+        user_id=userID,
+        title=title,
+        content=content,
+        created_at=datetime.now()
+    )
+
+    if new_post.id:
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect(url_for('/profile'))
+    return 'Not good'
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    userID = int(session.get('userID'))
+    return 'ghbdtn'
 
 
 if __name__ == "__main__":
