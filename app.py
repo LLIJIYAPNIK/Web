@@ -179,6 +179,14 @@ def profile():
     return render_template('profile.html', posts=posts, user=user)
 
 
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    post = Posts.query.filter_by(id=post_id).first()
+    if post:
+        return render_template('post.html', post=post)
+    return "Post not found"
+
+
 if __name__ == "__main__":
     with app.app_context():
         # Создание всех таблиц
