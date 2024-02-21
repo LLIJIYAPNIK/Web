@@ -9,7 +9,7 @@
             width: 100%;
             border: none;
             padding-top: 50px;
-            background-color: rgba(255, 255, 255, 255);
+            background-color: #151515;
             color: #aac7ff;
             height: 100px;
             font-size: 48px;
@@ -17,7 +17,7 @@
 
         #editor {
             height: auto;
-            background-color: rgba(255, 255, 255, 255);
+            background-color: #151515;
             color: #aac7ff;
             font-family: "Century Gothic";
             margin: 0;
@@ -27,6 +27,10 @@
 
         .ql-toolbar.ql-snow {
             display: none;
+        }
+
+        .bg_body {
+            background-color: #151515;
         }
     </style>
 
@@ -47,7 +51,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
-<body>
+<body class="bg_body">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
