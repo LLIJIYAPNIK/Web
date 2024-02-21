@@ -5,15 +5,15 @@
     <title>Registration Form</title>
 </head>
 <body>
-    <h1>Registration Form</h1>
-    <form method="POST" action="{{ url_for('register') }}">
-        {{ form.hidden_tag() }}
-        {{ form.name.label }} {{ form.name }}
-        {{ form.last_name.label }} {{ form.last_name }}
-        {{ form.mail.label }} {{ form.mail }}
-        {{ form.password.label }} {{ form.password }}
-        {{ form.copy_password.label }} {{ form.copy_password }}
-        {{ form.submit }}
-    </form>
+<h1>Registration Form</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name }} {{ form.name.errors }}
+    {{ form.last_name.label }} {{ form.last_name }} {{ form.last_name.errors }}
+    {{ form.mail.label }} {{ form.mail }} {{ form.mail.errors }}
+    {{ form.password.label }} {{ form.password }} {{ form.password.errors }}
+    {{ form.copy_password.label }} {{ form.copy_password }} {{ form.copy_password.errors }}
+    {{ form.submit }}
+</form>
 </body>
 </html>

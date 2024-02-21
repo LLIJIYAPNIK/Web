@@ -9,9 +9,9 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'some_key_123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://Sasha:Sasha@localhost/mydb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost/mydb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'
+app.config['SESSION_COOKIE_DOMAIN'] = None  # Используйте домен по умолчанию
 app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['SESSION_TYPE'] = 'filesystem'  # Можно выбрать другие типы хранения сессий
 
@@ -76,15 +76,15 @@ def login():
         username = form.mail.data
         password = form.password.data
 
-        user = db.session.query(User).filter_by(mail=username).first()
+        user = User.query.filter_by(mail=username).first()
 
         if user and check_password_hash(user.password, password):
             login_user(user)
-            session['userID'] = user.id  # Сохраняем ID пользователя в сессии
+            session['userID'] = user.id  # Save user ID in session
             name_last_name = f"{user.name} {user.last_name}"
             return redirect(url_for('index'))
 
-        flash('Invalid username or password', 'error')
+        flash('Invalid email or password', 'error')
 
     return render_template('login.html', form=form)
 
@@ -93,27 +93,32 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('yes')
-        hash_and_salted_password = generate_password_hash(
-            form.password.data,
-            method='pbkdf2:sha256',
-            salt_length=8
-        )
+        existing_user = User.query.filter_by(mail=form.mail.data).first()
+        if existing_user:
+            flash('User with this email already exists', 'error')
+        else:
+            hash_and_salted_password = generate_password_hash(
+                form.password.data,
+                method='pbkdf2:sha256',
+                salt_length=8
+            )
 
-        new_user = User(
-            mail=form.mail.data,
-            name=form.name.data,
-            last_name=form.last_name.data,
-            password=hash_and_salted_password
-        )
+            new_user = User(
+                mail=form.mail.data,
+                name=form.name.data,
+                last_name=form.last_name.data,
+                password=hash_and_salted_password
+            )
 
-        db.session.add(new_user)
-        db.session.commit()  # Сохранение изменений в базе данных
-
-        if new_user.id:
-            login_user(new_user)
-            session['userID'] = new_user.id
-            return redirect(url_for('index'))
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user)
+                session['userID'] = new_user.id
+                return redirect(url_for('index'))
+            except Exception as e:
+                db.session.rollback()
+                flash('An error occurred. Please try again.', 'error')
 
     return render_template('register.html', form=form)
 
@@ -168,7 +173,10 @@ def get_post():
 @login_required
 def profile():
     userID = int(session.get('userID'))
-    return 'ghbdtn'
+    posts = Posts.query.filter_by(user_id=userID).all()
+    user = User.query.filter_by(id=userID).first()
+    # print(posts[0].content)
+    return render_template('profile.html', posts=posts, user=user)
 
 
 if __name__ == "__main__":

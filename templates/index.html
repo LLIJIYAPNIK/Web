@@ -48,13 +48,13 @@
                             <li>
                                 <a href="#">{{ current_user.name }} {{ current_user.last_name }}</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Профиль</a></li>
+                                    <li><a href="/profile">Профиль</a></li>
                                     <li><a href="#">Корзина</a></li>
                                     <li><a href="/logout">Выйти</a></li>
                                 </ul>
                             </li>
                         {% else %}
-                            <li><a href="/register">Войти</a></li>
+                            <li><a href="/log">Войти</a></li>
                         {% endif %}
                     </ul>
                 </nav>
