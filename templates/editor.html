@@ -67,7 +67,7 @@
 <header class="header-section">
     <div class="container-fluid">
         <div class="logo">
-            <a href="./index.html">
+            <a href="/">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
             </a>
         </div>
@@ -76,16 +76,16 @@
                 <nav class="mainmenu mobile-menu">
                     <ul>
                         {% if current_user.is_authenticated %}
-                        <li>
-                            <a href="#">{{ current_user.name }} {{ current_user.last_name }}</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Профиль</a></li>
-                                <li><a href="#">Корзина</a></li>
-                                <li><a href="/logout">Выйти</a></li>
-                            </ul>
-                        </li>
+                            <li>
+                                <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="/profile">Профиль</a></li>
+                                    <li><a href="#">Корзина</a></li>
+                                    <li><a href="/logout">Выйти</a></li>
+                                </ul>
+                            </li>
                         {% else %}
-                        <li><a href="/register">Войти</a></li>
+                            <li><a href="/log">Войти</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -94,14 +94,14 @@
                 <div class="nav-menu">
                     <nav class="mainmenu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About us</a></li>
+                            <li class="active"><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
                             <li><a href="./schedule.html">Schedule</a></li>
                             <li><a href="./gallery.html">Gallery</a></li>
-                            <li><a href="./blog.html">Blog</a>
+                            <li><a href="./blog.html">Статьи</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./blog-single.html">Blog Details</a></li>
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
                                 </ul>
                             </li>
                             <li><a href="./contact.html">Contacts</a></li>
@@ -113,6 +113,7 @@
         </div>
 </header>
 <!-- Header End -->
+
 <div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
 
 <section>

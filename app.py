@@ -178,7 +178,8 @@ def profile():
     posts = Posts.query.filter_by(user_id=userID).all()
     user = User.query.filter_by(id=userID).first()
     # print(posts[0].content)
-    return render_template('profile.html', posts=posts, user=user)
+    post_len = len(posts)
+    return render_template('profile.html', posts=posts, user=user, length=post_len)
 
 
 @app.route('/post/<int:post_id>')

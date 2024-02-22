@@ -52,96 +52,98 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
 <body class="bg_body">
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <header class="header-section">
-        <div class="container-fluid">
-            <div class="logo">
-                <a href="./index.html">
-                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
-                </a>
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+            </a>
+        </div>
+        <div>
+            <div class="nav-menu-right">
+                <nav class="mainmenu mobile-menu">
+                    <ul>
+                        {% if current_user.is_authenticated %}
+                        <li>
+                            <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                            <ul class="dropdown">
+                                <li><a href="/profile">Профиль</a></li>
+                                <li><a href="#">Корзина</a></li>
+                                <li><a href="/logout">Выйти</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li><a href="/log">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
-            <div>
-                <div class="nav-menu-right">
+            <div class="container">
+                <div class="nav-menu">
                     <nav class="mainmenu mobile-menu">
                         <ul>
-                            {% if current_user.is_authenticated %}
-                            <li>
-                                <a href="#">{{ current_user.name }} {{ current_user.last_name }}</a>
+                            <li class="active"><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="./schedule.html">Schedule</a></li>
+                            <li><a href="./gallery.html">Gallery</a></li>
+                            <li><a href="./blog.html">Статьи</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Профиль</a></li>
-                                    <li><a href="#">Корзина</a></li>
-                                    <li><a href="/logout">Выйти</a></li>
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
                                 </ul>
                             </li>
-                            {% else %}
-                            <li><a href="/register">Войти</a></li>
-                            {% endif %}
+                            <li><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="container">
-                    <div class="nav-menu">
-                        <nav class="mainmenu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="./index.html">Home</a></li>
-                                <li><a href="./about-us.html">About us</a></li>
-                                <li><a href="./schedule.html">Schedule</a></li>
-                                <li><a href="./gallery.html">Gallery</a></li>
-                                <li><a href="./blog.html">Blog</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./about-us.html">About Us</a></li>
-                                        <li><a href="./blog-single.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./contact.html">Contacts</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+            </div>
             <div id="mobile-menu-wrap"></div>
         </div>
-    </header>
-    <!-- Header End -->
-    <div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
+</header>
+<!-- Header End -->
 
-    <!--  Content  -->
-    <div id="content" style="display: none; border: none">{{ post.content }}</div>
+<div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
 
-    <section>
-        <h1 align="center" id="titleField"> {{ post.title }} </h1>
-    </section>
+<!--  Content  -->
+<div id="content" style="display: none; border: none">{{ post.content }}</div>
 
-    <section style="text-align: center">
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-        <div id="editor" style="border: none; width: 80%; margin: 0 auto;"></div>
-        <script>
-            var content = document.getElementById('content').textContent;
+<section>
+    <h1 align="center" id="titleField"> {{ post.title }} </h1>
+</section>
 
-            var quill = new Quill('#editor', {
-                modules: {
-                    toolbar: []
-                },
-                theme: 'snow',
-                readOnly: true
-            });
+<section style="text-align: center">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <div id="editor" style="border: none; width: 80%; margin: 0 auto;"></div>
+    <script>
+        var content = document.getElementById('content').textContent;
 
-            quill.root.innerHTML = content;
-        </script>
-    </section>
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: []
+            },
+            theme: 'snow',
+            readOnly: true
+        });
 
-    <!-- Js Plugins -->
-    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        quill.root.innerHTML = content;
+    </script>
+</section>
+
+<!-- Js Plugins -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
