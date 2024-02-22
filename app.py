@@ -1,5 +1,7 @@
+from sqlalchemy.orm import sessionmaker
+
 from flask_session import Session
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from get_nearst_gym import get_gyms
 from forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -184,6 +186,74 @@ def post(post_id):
     post = Posts.query.filter_by(id=post_id).first()
     if post:
         return render_template('post.html', post=post)
+    return "Post not found"
+
+
+@app.route('/publish_post', methods=['POST'])
+def publish_post():
+    data = request.get_json()
+    post_id = str(data['post_id']).split("_")[2]
+    post = Posts.query.filter_by(id=post_id).first()
+    post.is_published = True
+    db.session.commit()
+
+    if post.is_published:
+        return jsonify({'redirect': url_for('all_posts')})
+    return 'Bad'
+
+
+@app.route('/all_posts', methods=['GET'])
+def all_posts():
+    posts = Posts.query.filter_by(is_published=True).all()
+    return render_template('all_posts.html', posts=posts)
+
+
+@app.route('/get_edit_post', methods=["POST"])  # Изменяем метод на GET
+def get_edit_post():
+    data = request.get_json()
+    post_id = str(data['post_id']).split("_")[2]
+    post = Posts.query.filter_by(id=post_id).first()
+    print(post)
+    if post:
+        return jsonify({'redirect': url_for('edit_post', post_id=post_id)})
+    return jsonify({'error': 'Post not found'})
+
+
+@app.route('/edit_post/<int:post_id>', methods=['GET'])
+def edit_post(post_id):
+    post = Posts.query.filter_by(id=post_id).first()
+
+    if post:
+        return render_template('edit_post.html', post=post)
+    return "Post not found"
+
+
+@app.route("/update_post", methods=["POST"])
+def update_post():
+    data = request.get_json()
+    post_id = data['post_id']
+    user_id = data['user_id']
+    title = data['title']
+    content = data['content']
+
+    post = Posts.query.filter_by(id=post_id).first()
+
+    post.title = title
+    post.content = content
+    db.session.commit()
+    return redirect(url_for('profile'))
+
+
+@app.route("/delete_post", methods=["POST"])
+def delete_post():
+    data = request.get_json()
+    post_id = str(data['post_id']).split("_")[2]
+    post = Posts.query.filter_by(id=post_id).first()
+
+    db.session.delete(post)
+    db.session.commit()
+    if True:
+        return jsonify({'redirect': url_for('profile')})
     return "Post not found"
 
 

@@ -36,6 +36,7 @@ class Posts(Base):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_published = db.Column(db.Boolean, default=False)
 
     user = db.relationship("User", backref="posts")
 
