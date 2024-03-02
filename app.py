@@ -1,5 +1,6 @@
 from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy import func
+from flask_msearch import Search
 from flask_session import Session
 from flask import render_template, request, redirect, url_for, session, flash, jsonify
 from get_nearst_gym import get_gyms
@@ -19,6 +20,9 @@ app.config['SESSION_TYPE'] = 'filesystem'  # Можно выбрать друг�
 
 db.init_app(app)
 Session(app)
+
+search = Search(db=db)
+search.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -152,7 +156,7 @@ def editor():
 def get_post():
     data = request.get_json()
     userID = int(session.get('userID'))
-    title = data['title']
+    title = str(data['title']).lower()
     content = data['content']
 
     print(userID, title, content)
@@ -205,9 +209,10 @@ def publish_post():
 
 @app.route('/all_posts', methods=['GET'])
 def all_posts():
-    posts = Posts.query.filter_by(is_published=True).all()
-    return render_template('all_posts.html', posts=posts)
 
+    posts = Posts.query.filter(Posts.is_published==True).all()
+
+    return render_template('all_posts.html', posts=posts)
 
 @app.route('/get_edit_post', methods=["POST"])  # Изменяем метод на GET
 def get_edit_post():
@@ -234,7 +239,7 @@ def update_post():
     data = request.get_json()
     post_id = data['post_id']
     user_id = data['user_id']
-    title = data['title']
+    title = str(data['title']).lower()
     content = data['content']
 
     post = Posts.query.filter_by(id=post_id).first()
@@ -256,6 +261,16 @@ def delete_post():
     if True:
         return jsonify({'redirect': url_for('profile')})
     return "Post not found"
+
+
+@app.route("/search")
+def w_search():
+    keyword = str(request.args.get('keyword')).lower()
+    results = Posts.query.filter(
+        Posts.is_published == True,
+        (func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(f"%{keyword}%"))
+    ).msearch(keyword, fields=['title'], limit=20).all()
+    return render_template("search.html", posts=results)
 
 
 if __name__ == "__main__":

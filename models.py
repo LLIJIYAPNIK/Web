@@ -31,6 +31,8 @@ class User(UserMixin, Base):
 
 class Posts(Base):
     __tablename__ = 'posts'
+    __searchable__ = ['title', 'content']
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
