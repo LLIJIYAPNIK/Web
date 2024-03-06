@@ -9,6 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask
 from models import User, Posts, db
 from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_paginate import Pagination, get_page_parameter
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'some_key_123'
@@ -270,6 +271,7 @@ def w_search():
         Posts.is_published == True,
         (func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(f"%{keyword}%"))
     ).msearch(keyword, fields=['title'], limit=20).all()
+
     return render_template("search.html", posts=results)
 
 

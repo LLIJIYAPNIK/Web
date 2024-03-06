@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Registration Form</title>
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../static/css/register.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Registration Form</h1>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.name.label }} {{ form.name }} {{ form.name.errors }}
-    {{ form.last_name.label }} {{ form.last_name }} {{ form.last_name.errors }}
-    {{ form.mail.label }} {{ form.mail }} {{ form.mail.errors }}
-    {{ form.password.label }} {{ form.password }} {{ form.password.errors }}
-    {{ form.copy_password.label }} {{ form.copy_password }} {{ form.copy_password.errors }}
-    {{ form.submit }}
-</form>
+        <img src="../static/img/logo.png" alt="" style="margin: 50px 0 0 50px">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 30px;">Регистрация</h1>
+            <form method="POST" class="reg_elements" >
+                {{ form.hidden_tag() }}
+                {{ form.name.label }}<br>
+                {{ form.name }}<br>
+                <br>
+                {{ form.last_name.label }}<br>
+                {{ form.last_name }}<br>
+                <br>
+                {{ form.mail.label }}<br>
+                {{ form.mail }}<br>
+                <br>
+                {{ form.password.label }}<br>
+                {{ form.password }}<br>
+                <br>
+                {{ form.copy_password.label }}<br>
+                {{ form.copy_password }}<br>
+                <br>
+                {{ form.submit }}
+            </form>
+            <div class="container_1">
+                <p style="margin: 0">Уже зарегистрированы?</p>
+                <a href="./login.html" class="link_1">Нажмите, чтобы войти</a>
+            </div>
+        </div>
 </body>
 </html>
