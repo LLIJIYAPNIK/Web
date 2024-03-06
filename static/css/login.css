@@ -1,0 +1,90 @@
+html {
+    font-family: "Nunito Sans", sans-serif;
+    background-image: url(../img/hero-slider/hero-2.jpg);
+    background-size: cover;
+    color: white;
+    caret-color: white;
+}
+
+.container {
+    background-color: rgb(40, 40, 40);
+    margin-top: 100px;
+    width: 400px;
+    padding-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+.log_elements {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    font-weight: bold;
+    line-height: 25px;
+    width: 65%;
+}
+
+#submit {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: bold;
+    position: relative;
+    padding: 10px 20px 10px 20px;
+    font-size: large;
+    border-radius: 35px;
+    border-style: solid;
+    transition: all 200ms ease;
+    box-shadow: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    background-color: white;
+    color: black;
+
+}
+
+#submit:hover {
+    background-color: black;
+    color: white;
+}
+
+#mail,
+#password {
+    border: 0;
+    border-bottom: 2px double white;
+    font-size: large;
+    font-family: 'Nunito Sans';
+    width: 100%;
+    background-color: transparent;
+    color: white;
+}
+
+#mail:focus,
+#password:focus {
+    outline: 0;
+
+}
+
+.container_1 {
+    text-align: center;
+}
+
+.link_1 {
+    text-decoration: 0;
+    color: crimson;
+}
+ .link_1:active {
+    color: red;
+ }
+
+ .link_1:hover {
+    text-decoration: underline;
+ }
+
+ input {outline: none;}
+ input:-webkit-autofill {
+     -webkit-box-shadow: inset 0 0 0 50px rgb(40, 40, 40) !important;
+     -webkit-text-fill-color: white !important;
+     color: white !important;
+ }
