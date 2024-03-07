@@ -18,6 +18,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_DOMAIN'] = None  # Используйте домен по умолчанию
 app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['SESSION_TYPE'] = 'filesystem'  # Можно выбрать другие типы хранения сессий
+app.config["POSTS_PER_PAGE"] = 1
 
 db.init_app(app)
 Session(app)
@@ -210,10 +211,21 @@ def publish_post():
 
 @app.route('/all_posts', methods=['GET'])
 def all_posts():
+    page = request.args.get('page', 1, type=int)
 
-    posts = Posts.query.filter(Posts.is_published==True).all()
+    query = Posts.query.filter(Posts.is_published == True)
 
-    return render_template('all_posts.html', posts=posts)
+    # Используем объект запроса для пагинации
+    posts = query.paginate(page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    next_url = url_for('all_posts', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('all_posts', page=posts.prev_num) \
+        if posts.has_prev else None
+    this_url = url_for('all_posts', page=posts.page)
+
+    return render_template('all_posts.html', posts=posts, next_url=next_url, prev_url=prev_url, this_url=this_url,
+                           page=page, threshold=3, total_pages=(query.count() - 1) // app.config['POSTS_PER_PAGE'] + 1)
+
 
 @app.route('/get_edit_post', methods=["POST"])  # Изменяем метод на GET
 def get_edit_post():
@@ -264,15 +276,22 @@ def delete_post():
     return "Post not found"
 
 
-@app.route("/search")
+@app.route("/search", methods=["GET"])
 def w_search():
-    keyword = str(request.args.get('keyword')).lower()
-    results = Posts.query.filter(
-        Posts.is_published == True,
-        (func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(f"%{keyword}%"))
-    ).msearch(keyword, fields=['title'], limit=20).all()
+    page = request.args.get('page', 1, type=int)
 
-    return render_template("search.html", posts=results)
+    keyword = str(request.args.get('keyword')).lower()
+    results = Posts.query.filter(Posts.is_published == True, (func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(f"%{keyword}%"))).msearch(keyword, fields=['title', 'content'])
+
+    posts = results.paginate(page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+
+    next_url = url_for('w_search', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('w_search', page=posts.prev_num) if posts.has_prev else None
+    this_url = url_for('w_search', page=page)
+
+    return render_template('search.html', posts=posts, next_url=next_url, prev_url=prev_url, this_url=this_url,
+                           page=page, threshold=3,
+                           total_pages=(results.count()) // app.config['POSTS_PER_PAGE'])
 
 
 if __name__ == "__main__":
