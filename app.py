@@ -282,8 +282,8 @@ def w_search():
 
     keyword = str(request.args.get('keyword')).lower()
     results = Posts.query.filter(Posts.is_published == True, (
-                func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(
-            f"%{keyword}%"))).msearch(keyword, fields=['title', 'content'])
+            func.lower(Posts.title).ilike(f"%{keyword}%") | func.lower(Posts.content).ilike(
+        f"%{keyword}%"))).msearch(keyword, fields=['title', 'content'])
 
     posts = results.paginate(page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
 
@@ -295,6 +295,21 @@ def w_search():
 
     return render_template('search.html', posts=posts, next_url=next_url, prev_url=prev_url, this_url=this_url,
                            page=page, threshold=3, total_pages=total_pages)
+
+
+@app.route('/independent_training')
+def independent_training():
+    return render_template("independent_training.html")
+
+
+@app.route("/group_classes")
+def group_classes():
+    return render_template("group_classes.html")
+
+
+@app.route('/personal_training')
+def personal_training():
+    return render_template("personal_training.html")
 
 
 if __name__ == "__main__":
