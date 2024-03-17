@@ -2268,6 +2268,25 @@ ol {
 	background: linear-gradient(45deg, #e16521, #e4381C);
 }
 
+.vpered {
+	font-size: 16px;
+	color: #ffffff;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 2px;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.blog-option .blog-pagination .vpered a:hover {
+	background: -o-linear-gradient(45deg, #e16521, #e4381C);
+	background: linear-gradient(45deg, #e16521, #e4381C);
+}
+
 .blog-option .blog-pagination a:first-child {
 	margin-right: 14px;
 }

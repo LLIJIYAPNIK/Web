@@ -99,23 +99,43 @@
 <br>
 {% endfor %}
 
-{% if prev_url %}
-    <a class="primary-btn" href="{{ prev_url }}" style="width: auto; margin-left: 15px;"><</a>
-{% endif %}
 
-{% for p in range(1, total_pages + 1) %}
-    {% if p == page %}
-        <span class="primary-btn" style="width: auto; margin-left: 10px;">{{ p }}</span>
-    {% elif p <= 2 or p > total_pages - 2 or (p >= page - 1 and p <= page + 1) %}
-        <a href="{{  url_for('all_posts', page=p) }}" class="primary-btn cta-btn" style="width: auto; margin-left: 10px;">{{ p }}</a>
-    {% elif p == 3 or p == total_pages - 1 %}
-        <b style="color: #AAA; margin-left: 10px;">...</b>
-    {% endif %}
-{% endfor %}
-
-{% if next_url %}
-    <a class="primary-btn" href="{{ next_url }}" style="width: auto; margin-left: 10px;">></a>
-{% endif %}
+<div class="blog-option">
+    <div class="blog-pagination">
+        {% if prev_url %}
+            <div style="margin-left: 30px;" >
+                <a href="{{ prev_url }}" style="width: 40px;">&lt;</a>
+                {% for p in range(1, total_pages + 1) %}
+                    {% if p == page %}
+                        <a class="active">{{ p }}</a>
+                    {% elif p <= 2 or p > total_pages - 2 or (p >= page - 1 and p <= page + 1) %}
+                        <a href="{{ url_for('all_posts', page=p) }}">{{ p }}</a>
+                    {% elif p >= 3 and total_pages - p == 3 %}
+                        <b style="color: #AAA; margin-left: 10px; margin-right: 10px;">...</b>
+                    {% endif %}
+                    {% if total_pages - p >= 0 and p == total_pages and next_url %}
+                        <a href="{{ next_url }}" style="width: 40px; ">&gt;</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div style="margin-left: 30px;">
+                {% for p in range(1, total_pages + 1) %}
+                    {% if p == page %}
+                        <a class="active">{{ p }}</a>
+                    {% elif p <= 2 or p > total_pages - 2 or (p >= page - 1 and p <= page + 1) %}
+                        <a href="{{ url_for('all_posts', page=p) }}">{{ p }}</a>
+                    {% elif p >= 3 and total_pages - p == 3 %}
+                        <b style="color: #AAA; margin-left: 10px; margin-right: 10px;">...</b>
+                    {% endif %}
+                    {% if total_pages - p >= 0 and p == total_pages and next_url %}
+                        <a href="{{ next_url }}" style="width: 40px;">&gt;</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
 
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
