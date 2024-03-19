@@ -112,6 +112,7 @@
 
 <!--  Content  -->
 <div id="content" style="display: none; border: none">{{ post.content }}</div>
+<div id="post_id" style="display: none">{{ post.id }}</div>
 
 <section>
     <h1 align="center" id="titleField"> {{ post.title }} </h1>
@@ -134,6 +135,33 @@
         quill.root.innerHTML = content;
     </script>
 </section>
+
+<button onclick="likePost()">Like</button>
+<button onclick="dislikePost()">Dislike</button>
+
+<script>
+    function likePost() {
+        fetch(`/like_post/${document.getElementById("post_id").textContent}`, {method: 'POST'})
+            .then(response => {
+                if (response.ok) {
+                    console.log('Post liked successfully');
+                } else {
+                    console.error('Failed to like post');
+                }
+            });
+    }
+
+    function dislikePost() {
+        fetch(`/dislike_post/${document.getElementById("post_id").textContent}`, {method: 'POST'})
+            .then(response => {
+                if (response.ok) {
+                    console.log('Post disliked successfully');
+                } else {
+                    console.error('Failed to dislike post');
+                }
+            });
+    }
+</script>
 
 <!-- Js Plugins -->
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>

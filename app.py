@@ -7,8 +7,8 @@ from get_nearst_gym import get_gyms
 from forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask
-from models import User, Posts, db
-from flask_login import LoginManager, login_user, login_required, logout_user
+from models import User, Posts, db, PostReactions
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_paginate import Pagination, get_page_parameter
 
 app = Flask(__name__)
@@ -310,6 +310,60 @@ def group_classes():
 @app.route('/personal_training')
 def personal_training():
     return render_template("personal_training.html")
+
+
+@app.route('/like_post/<int:post_id>', methods=['POST'])
+def like_post(post_id):
+    if current_user.is_authenticated:
+        post_reaction = PostReactions.query.filter(PostReactions.post_id == post_id).first()
+        # print(current_user.id, post_reaction, post_id)
+        if not post_reaction:
+            new_post_reaction = PostReactions(post_id=post_id, user_id=current_user.id, reaction_type='like')
+            db.session.add(new_post_reaction)
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'like':
+            post_reaction.reaction_type = 'None'
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'dislike':
+            post_reaction.reaction_type = 'like'
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'None':
+            post_reaction.reaction_type = 'like'
+            db.session.commit()
+            return redirect(request.referrer)
+        return redirect(request.referrer)
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/dislike_post/<int:post_id>', methods=['POST'])
+def dislike_post(post_id):
+    if current_user.is_authenticated:
+        post_reaction = PostReactions.query.filter(PostReactions.post_id == post_id).first()
+        # print(current_user.id, post_reaction, post_id)
+        if not post_reaction:
+            new_post_reaction = PostReactions(post_id=post_id, user_id=current_user.id, reaction_type='dislike')
+            db.session.add(new_post_reaction)
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'dislike':
+            post_reaction.reaction_type = 'None'
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'like':
+            post_reaction.reaction_type = 'dislike'
+            db.session.commit()
+            return redirect(request.referrer)
+        if post_reaction.reaction_type == 'None':
+            post_reaction.reaction_type = 'dislike'
+            db.session.commit()
+            return redirect(request.referrer)
+        return redirect(request.referrer)
+    else:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
