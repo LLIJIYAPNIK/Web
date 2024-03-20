@@ -32,6 +32,18 @@
         .bg_body {
             background-color: #151515;
         }
+
+        button {
+            padding: 10px;
+            background: #fff;
+            border: none;
+        }
+
+
+        button:active {
+            padding: 9px 11px 11px 9px;
+            background: #999;
+        }
     </style>
 
     <!--  Quill -->
@@ -136,15 +148,50 @@
     </script>
 </section>
 
-<button onclick="likePost()">Like</button>
-<button onclick="dislikePost()">Dislike</button>
+<section style="width: 80%; margin-left: 10%; margin-top: 50px; background-color: #151515;">
+    {% if user_position == "None" %}
+    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                         src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
+    </button>
+    <b style="color: #FFFFFF;">{{ likes_count }}</b>
+
+    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
+    </button>
+    <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
+    {% endif %}
+
+    {% if user_position == "like" %}
+    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                         src="{{ url_for('static', filename='img/reactions/like_user.png') }}">
+    </button>
+    <b style="color: #FFFFFF">{{ likes_count }}</b>
+
+    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
+    </button>
+    <b style="color: #FFFFFF">{{ dislikes_count }}</b>
+    {% endif %}
+
+    {% if user_position == "dislike" %}
+    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                         src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
+    </button>
+    <b style="color: #FFFFFF">{{ likes_count }}</b>
+
+    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_user.png') }}">
+    </button>
+    <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
+    {% endif %}
+</section>
 
 <script>
     function likePost() {
         fetch(`/like_post/${document.getElementById("post_id").textContent}`, {method: 'POST'})
             .then(response => {
                 if (response.ok) {
-                    console.log('Post liked successfully');
+                    parent.location.reload();
                 } else {
                     console.error('Failed to like post');
                 }
@@ -155,7 +202,7 @@
         fetch(`/dislike_post/${document.getElementById("post_id").textContent}`, {method: 'POST'})
             .then(response => {
                 if (response.ok) {
-                    console.log('Post disliked successfully');
+                    location.reload();
                 } else {
                     console.error('Failed to dislike post');
                 }
