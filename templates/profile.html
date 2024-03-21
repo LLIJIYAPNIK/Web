@@ -7,6 +7,8 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
@@ -17,6 +19,42 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
+    <style>
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            border-top: none;
+        }
+    </style>
 </head>
 <body style="background-color: #151515">
 <!-- Page Preloder -->
@@ -37,16 +75,16 @@
                 <nav class="mainmenu mobile-menu">
                     <ul>
                         {% if current_user.is_authenticated %}
-                            <li>
-                                <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
-                                <ul class="dropdown">
-                                    <li><a href="/profile">Профиль</a></li>
-                                    <li><a href="#">Корзина</a></li>
-                                    <li><a href="/logout">Выйти</a></li>
-                                </ul>
-                            </li>
+                        <li>
+                            <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                            <ul class="dropdown">
+                                <li><a href="/profile">Профиль</a></li>
+                                <li><a href="#">Корзина</a></li>
+                                <li><a href="/logout">Выйти</a></li>
+                            </ul>
+                        </li>
                         {% else %}
-                            <li><a href="/log">Войти</a></li>
+                        <li><a href="/log">Войти</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -95,9 +133,18 @@
         </div>
     </div>
 </section>
-{% if length == 0 %}
+
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'London')">Посты</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">Понравилось</button>
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Не понравилось</button>
+</div>
+
+<div id="London" class="tabcontent">
+    {% if length == 0 %}
     <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
-{% else %}
+    {% else %}
     {% for post in posts %}
     <section class="cta-section">
         <div class="container">
@@ -105,19 +152,23 @@
                 <div class="col-lg-12">
                     <div id="post_id_{{ post.id }}">
                         <div class="cta-text">
-                            <a href="{{ url_for('post', post_id=post['id']) }}"><h3>{{ post.title }}</h3></a>
+                            <a href="{{ url_for('post', post_id=post['id']) }}"><h3>{{ post.title }}</h3>
+                            </a>
                             <h4>{{ post.created_at }}</h4>
                         </div>
                         {% if post.is_published != True %}
-                        <button onclick="delete_post(this)" class="primary-btn cta-btn" style="width: auto; margin-left: 10px">Удалить
+                        <button onclick="delete_post(this)" class="primary-btn cta-btn"
+                                style="width: auto; margin-left: 10px">Удалить
                         </button>
                         <button onclick="edit_post(this)" class="primary-btn cta-btn"
                                 style="width: auto; margin-left: 10px">Изменить
                         </button>
-                        <button onclick="publish_post(this)" class="primary-btn cta-btn" style="width: auto">Опубликовать
+                        <button onclick="publish_post(this)" class="primary-btn cta-btn"
+                                style="width: auto">Опубликовать
                         </button>
                         {% else %}
-                        <button onclick="delete_post(this)" class="primary-btn cta-btn" style="width: auto; margin-left: 10px">Удалить
+                        <button onclick="delete_post(this)" class="primary-btn cta-btn"
+                                style="width: auto; margin-left: 10px">Удалить
                         </button>
                         {% endif %}
                     </div>
@@ -127,7 +178,72 @@
     </section>
     <br>
     {% endfor %}
-{% endif %}
+    {% endif %}
+</div>
+
+<div id="Paris" class="tabcontent">
+    {% if length_l == 0 %}
+    <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
+    {% else %}
+    {% for like in likes %}
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="post_id_{{ like.post_id }}">
+                        <div class="cta-text">
+                            <a href="{{ url_for('post', post_id=like['id']) }}"><h3>{{ like.post.title }}</h3></a>
+                            <h4>{{ like.post.created_at }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div id="Tokyo" class="tabcontent">
+    {% if dislike_len == 0 %}
+    <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
+    {% else %}
+    {% for like in dislikes %}
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="post_id_{{ like.post_id }}">
+                        <div class="cta-text">
+                            <a href="{{ url_for('post', post_id=like['id']) }}"><h3>{{ like.post.title }}</h3></a>
+                            <h4>{{ like.post.created_at }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 
 <!-- Js Plugins -->
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
@@ -139,6 +255,16 @@
 <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function publish_post(button) {
         var post_id = button.parentNode.id;
