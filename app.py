@@ -1,3 +1,4 @@
+from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 from flask_msearch import Search
@@ -7,9 +8,12 @@ from get_nearst_gym import get_gyms
 from forms import LoginForm, RegistrationForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask
-from models import User, Posts, db, PostReactions
+from models import User, Posts, db, PostReactions, Gyms
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_paginate import Pagination, get_page_parameter
+from admin import DashboardView, StatsView
+from flask_admin import Admin, BaseView, AdminIndexView, expose
+from admin import UserView, PostsView, PostReactionsView, GymsView
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'some_key_123'
@@ -28,6 +32,13 @@ search.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+admin = Admin(app, template_mode='bootstrap3',index_view = DashboardView())
+admin.add_view(StatsView(name='Статистика', endpoint='stats'))
+admin.add_view(UserView(User, db.session))
+admin.add_view(PostsView(Posts, db.session))
+admin.add_view(PostReactionsView(PostReactions, db.session))
+admin.add_view(GymsView(Gyms, db.session))
 
 latitude_user = 0
 longitude_user = 0
@@ -184,15 +195,17 @@ def profile():
     posts = Posts.query.filter_by(user_id=userID).all()
     user = User.query.filter_by(id=userID).first()
 
-    posts_reactoins_like = PostReactions.query.filter(PostReactions.user_id == current_user.id, PostReactions.reaction_type == 'like').all()
+    posts_reactoins_like = PostReactions.query.filter(PostReactions.user_id == current_user.id,
+                                                      PostReactions.reaction_type == 'like').all()
     posts_reactoins_dislike = PostReactions.query.filter(PostReactions.user_id == current_user.id,
-                                              PostReactions.reaction_type == 'dislike').all()
+                                                         PostReactions.reaction_type == 'dislike').all()
 
     # print(posts[0].content)
     post_len = len(posts)
     like_len = len(posts_reactoins_like)
     dislike_len = len(posts_reactoins_dislike)
-    return render_template('profile.html', posts=posts, user=user, length=post_len, lemgth_l=like_len, dislike_len=dislike_len, likes=posts_reactoins_like, dislikes=posts_reactoins_dislike)
+    return render_template('profile.html', posts=posts, user=user, length=post_len, lemgth_l=like_len,
+                           dislike_len=dislike_len, likes=posts_reactoins_like, dislikes=posts_reactoins_dislike)
 
 
 @app.route('/post/<int:post_id>')
