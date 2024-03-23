@@ -107,7 +107,7 @@
     {% if p == page %}
         <span class="primary-btn" style="width: auto; margin-left: 10px;">{{ p }}</span>
     {% elif p <= 2 or p > total_pages - 2 or (p >= page - 1 and p <= page + 1) %}
-        <a href="{{ url_for('w_search', page=p) }}" class="primary-btn cta-btn" style="width: auto; margin-left: 10px;">{{ p }}</a>
+        <a href="{{ url_for('w_search', page=p, keyword=request.args.get('keyword')) }}" class="primary-btn cta-btn" style="width: auto; margin-left: 10px;">{{ p }}</a>
     {% elif p == 3 or p == total_pages - 1 %}
         <b style="color: #AAA; margin-left: 10px;">...</b>
     {% endif %}
