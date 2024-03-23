@@ -126,6 +126,7 @@
                         <div class="hero-text">
                             <h1>{{ user.name }} {{ user.last_name }}</h1>
                             <h2>{{ user.mail }}</h2>
+                            <h3 style="color: #FFF">UTC {{ user.created_at }}</h3>
                         </div>
                     </div>
                 </div>
@@ -143,7 +144,7 @@
 
 <div id="London" class="tabcontent">
     {% if length == 0 %}
-    <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
+    <h1 align="center" style="color: #FFFFFF">Здесь пока ничего нет</h1>
     {% else %}
     {% for post in posts %}
     <section class="cta-section">
@@ -182,8 +183,8 @@
 </div>
 
 <div id="Paris" class="tabcontent">
-    {% if length_l == 0 %}
-    <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
+    {% if lemgth_l == 0 %}
+    <h1 align="center" style="color: #FFFFFF">Здесь пока ничего нет</h1>
     {% else %}
     {% for like in likes %}
     <section class="cta-section">
@@ -207,7 +208,7 @@
 
 <div id="Tokyo" class="tabcontent">
     {% if dislike_len == 0 %}
-    <h1 align="center" style="color: #FFFFFF">Здесь пока нет постов</h1>
+    <h1 align="center" style="color: #FFFFFF">Здесь пока ничего нет</h1>
     {% else %}
     {% for like in dislikes %}
     <section class="cta-section">

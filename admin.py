@@ -9,12 +9,6 @@ class DashboardView(AdminIndexView):
         return self.render('dashboard_index.html')
 
 
-class StatsView(BaseView):
-    @expose('/')
-    def index(self):
-        return self.render('stat_admin.html')
-
-
 class UserView(ModelView):
     column_list = User.__table__.columns.keys()
 

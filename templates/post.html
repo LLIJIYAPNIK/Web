@@ -127,7 +127,7 @@
 <div id="post_id" style="display: none">{{ post.id }}</div>
 
 <section>
-    <h1 align="center" id="titleField"> {{ post.title }} </h1>
+    <h1 align="center" id="titleField" style="height: auto;"> {{ post.title }} </h1>
 </section>
 
 <section style="text-align: center">
@@ -149,40 +149,42 @@
 </section>
 
 <section style="width: 80%; margin-left: 10%; margin-top: 50px; background-color: #151515;">
-    {% if user_position == "None" %}
-    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
-                                                                         src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
-    </button>
-    <b style="color: #FFFFFF;">{{ likes_count }}</b>
+    {% if post.is_published == True %}
+        {% if user_position == "None" %}
+        <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                             src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
+        </button>
+        <b style="color: #FFFFFF;">{{ likes_count }}</b>
 
-    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
-                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
-    </button>
-    <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
-    {% endif %}
+        <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                                   src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
+        </button>
+        <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
+        {% endif %}
 
-    {% if user_position == "like" %}
-    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
-                                                                         src="{{ url_for('static', filename='img/reactions/like_user.png') }}">
-    </button>
-    <b style="color: #FFFFFF">{{ likes_count }}</b>
+        {% if user_position == "like" %}
+        <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                             src="{{ url_for('static', filename='img/reactions/like_user.png') }}">
+        </button>
+        <b style="color: #FFFFFF">{{ likes_count }}</b>
 
-    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
-                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
-    </button>
-    <b style="color: #FFFFFF">{{ dislikes_count }}</b>
-    {% endif %}
+        <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                                   src="{{ url_for('static', filename='img/reactions/dislike_none.png') }}">
+        </button>
+        <b style="color: #FFFFFF">{{ dislikes_count }}</b>
+        {% endif %}
 
-    {% if user_position == "dislike" %}
-    <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
-                                                                         src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
-    </button>
-    <b style="color: #FFFFFF">{{ likes_count }}</b>
+        {% if user_position == "dislike" %}
+        <button onclick="likePost()" style="background-color: #151515;"><img style="height: 50px;"
+                                                                             src="{{ url_for('static', filename='img/reactions/like_none.png') }}">
+        </button>
+        <b style="color: #FFFFFF">{{ likes_count }}</b>
 
-    <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
-                                                                                               src="{{ url_for('static', filename='img/reactions/dislike_user.png') }}">
-    </button>
-    <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
+        <button onclick="dislikePost()" style="background-color: #151515; margin-left: 50px;"><img style="height: 50px;"
+                                                                                                   src="{{ url_for('static', filename='img/reactions/dislike_user.png') }}">
+        </button>
+        <b style="color: #FFFFFF;">{{ dislikes_count }}</b>
+        {% endif %}
     {% endif %}
 </section>
 

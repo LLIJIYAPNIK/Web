@@ -24,6 +24,7 @@ class User(UserMixin, Base):
     name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def get_id(self):
         return str(self.id)

@@ -11,7 +11,7 @@ from flask import Flask
 from models import User, Posts, db, PostReactions, Gyms
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_paginate import Pagination, get_page_parameter
-from admin import DashboardView, StatsView
+from admin import DashboardView
 from flask_admin import Admin, BaseView, AdminIndexView, expose
 from admin import UserView, PostsView, PostReactionsView, GymsView
 
@@ -34,7 +34,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 admin = Admin(app, template_mode='bootstrap3',index_view = DashboardView())
-admin.add_view(StatsView(name='Статистика', endpoint='stats'))
 admin.add_view(UserView(User, db.session))
 admin.add_view(PostsView(Posts, db.session))
 admin.add_view(PostReactionsView(PostReactions, db.session))
