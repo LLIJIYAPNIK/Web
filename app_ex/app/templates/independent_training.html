@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Activitar | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
+
+</head>
+
+<body style="background-color: #151515;">
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="/static">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+            </a>
+        </div>
+        <div>
+            <div class="nav-menu-right">
+                <nav class="mainmenu mobile-menu">
+                    <ul>
+                        {% if current_user.is_authenticated %}
+                        <li>
+                            <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                            <ul class="dropdown">
+                                <li><a href="/profile">Профиль</a></li>
+                                <li><a href="#">Корзина</a></li>
+                                <li><a href="/logout">Выйти</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li><a href="/log">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="/static">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="schedule.html">Schedule</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="blog.html">Статьи</a>
+                                <ul class="dropdown">
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+</header>
+<!-- Header End -->
+<div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
+
+<!-- Breadcrumb Section Begin -->
+<section class="blog-single-hero set-bg" data-setbg="{{ url_for('static', filename='img/pre_1.jpg') }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7 m-auto text-center">
+                <div class="bs-hero-text">
+                    <h2>Самостоятельные тренировки</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb End -->
+
+<div style="margin-top: 50px;">
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Самостоятельные тренировки – это тренировки, которые проводятся без участия инструктора или группы. Это может
+        быть занятие в домашних условиях, на открытом воздухе или в спортивном зале, когда вы самостоятельно выбираете
+        программу тренировок, упражнения и интенсивность занятий.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Первым шагом к успешным самостоятельным тренировкам является разработка плана тренировок. Определите свои цели –
+        хотите ли вы похудеть, улучшить физическую форму, набрать мышечную массу или улучшить выносливость. На основе
+        этих целей разработайте программу тренировок, включающую разнообразные упражнения для всех групп мышц и
+        кардио-нагрузки.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        При составлении плана тренировок учитывайте свои индивидуальные особенности и ограничения. Если у вас есть
+        какие-то травмы или заболевания, обязательно проконсультируйтесь с врачом или тренером перед началом занятий.
+        Важно также учитывать свой уровень подготовки и постепенно увеличивать нагрузку, чтобы избежать переутомления и
+        травм.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Для успешных самостоятельных тренировок важно иметь необходимое оборудование. В зависимости от выбранной
+        программы тренировок вам могут понадобиться гантели, штанга, скакалка, фитбол, эспандеры и другие спортивные
+        принадлежности. Обеспечьте себя всем необходимым для эффективных занятий.
+    </p>
+</div>
+
+<div align="center" style="margin-top: 50px;">
+    <img src="{{ url_for('static', filename='img/pre_2.jpg') }}" alt="" style="height: 300px;">
+    <img src="{{ url_for('static', filename='img/pre_3.jpg') }}" alt="" style="height: 300px; margin-left: 20px;">
+    <img src="{{ url_for('static', filename='img/pre_4.jpg') }}" alt="" style="height: 300px; margin-left: 20px;">
+</div>
+
+<div style="margin-top: 50px;">
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Помимо физических аспектов, самостоятельные тренировки также требуют дисциплины и самодисциплины. Вам придется
+        самостоятельно контролировать свое время, следить за выполнением плана тренировок и поддерживать мотивацию на
+        протяжении всего процесса. Регулярность и постоянство – ключевые факторы успеха в самостоятельных тренировках.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Одним из главных преимуществ самостоятельных тренировок является гибкость. Вы можете выбирать удобное время для
+        занятий, менять программу тренировок в зависимости от своих потребностей и целей, а также проводить тренировки в
+        любом удобном месте – дома, на улице или в спортивном зале.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Другим преимуществом самостоятельных тренировок является экономия времени и денег. Вы не тратите время на
+        поездку в зал или на ожидание начала групповых занятий, а также экономите деньги на абонементах и услугах
+        инструкторов. Самостоятельные тренировки позволяют вам быть хозяином своего времени и ресурсов.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Однако самостоятельные тренировки имеют и некоторые недостатки. Один из них – отсутствие контроля со стороны
+        профессионала. Без инструктора вы можете неправильно выполнять упражнения, что может привести к травмам или
+        недостаточной эффективности тренировок. Поэтому важно обладать достаточными знаниями о правильной технике
+        выполнения упражнений.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Еще одним недостатком самостоятельных тренировок является отсутствие мотивации. Без поддержки инструктора или
+        группы вам может быть сложно поддерживать высокий уровень мотивации на протяжении всей программы тренировок.
+        Важно находить источники мотивации – будь то цели, музыка или другие стимулы.
+    </p>
+
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Также стоит отметить, что самостоятельные тренировки могут быть менее эффективными по сравнению с занятиями под
+        руководством инструктора. Без профессионального контроля вы можете не достичь желаемых результатов или не
+        использовать свой потенциал в полной мере.
+    </p>
+
+    <br>
+    <p style="color: #fff; font-weight: 500; font-size: 16px; width: 80%; margin-left: 10%; margin-right: 10%;">
+        Итак, самостоятельные тренировки имеют ряд преимуществ, таких как гибкость, экономия времени и денег, но также
+        сопряжены с некоторыми недостатками, включая отсутствие контроля и мотивации, а также возможное снижение
+        эффективности тренировок. Важно находить баланс между самостоятельными занятиями и занятиями под руководством
+        профессионала для достижения оптимальных результатов в фитнесе и спорте.
+    </p>
+</div>
+
+<div>
+<h3 style="margin-left: 10%; color: #FFFFFF">Полезные статьи</h3>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+<!-- Js Plugins -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
