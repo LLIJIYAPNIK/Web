@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_msearch import Search
@@ -13,10 +12,12 @@ db = SQLAlchemy(app)
 
 session = Session(app)
 
-search = Search()
+search = Search(db=db)
+search.init_app(app)
 
 login_manager = LoginManager(app)
 
-admin = Admin(app, template_mode='bootstrap3')
-
-from . import forms, get_nearst_gym, models, routes
+from . import get_nearst_gym
+from routes import main, article, editor, location, profile, search, user
+from admin import admin
+from routes.post import all, delete, edit, get, post, publish, reaction, update

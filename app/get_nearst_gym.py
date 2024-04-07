@@ -1,4 +1,4 @@
-from app_ex.app.models import Gyms
+from app.models.gym import Gyms
 from geopy.distance import geodesic
 from functools import lru_cache
 

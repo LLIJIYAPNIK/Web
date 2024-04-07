@@ -4,12 +4,6 @@ from wtforms.validators import DataRequired, Email
 from wtforms.validators import EqualTo
 
 
-class LoginForm(FlaskForm):
-    mail = StringField('Эл. почта', validators=[DataRequired(), Email()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    submit = SubmitField('Войти')
-
-
 class RegistrationForm(FlaskForm):
     name = StringField('Имя', validators=[DataRequired()])
     last_name = StringField('Фамилия', validators=[DataRequired()])
