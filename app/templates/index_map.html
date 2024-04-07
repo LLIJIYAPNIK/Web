@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<section>
+<section style="width: 100%">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -36,54 +36,42 @@
     <header class="header-section">
         <div class="container-fluid">
             <div class="logo">
-                <a href="/static">
+                <a href="/">
                     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
                 </a>
-                <div class="container-fluid">
-                    <div class="nav-menu">
-                        <nav class="mainmenu mobile-menu">
-                                {% if current_user.is_authenticated %}
-                                        <ul>
-                                            <li><a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="/profile">Профиль</a></li>
-                                                    <li><a href="#">Корзина</a></li>
-                                                    <li><a href="/logout">Выйти</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                {% else %}
-                                    <ul><li><a href="/log">Войти</a></li></ul>
-                                {% endif %}
-                        </nav>
-                    </div>
-                </div>
-                <div id="mobile-menu-wrap"></div>
-                <div class="container">
-                    <div class="nav-menu">
-                        <nav class="mainmenu mobile-menu" style="display: flex">
-                            <ul>
-                                <li class="active"><a href="/static">Главная</a></li>
-                                <li><a href="#">О нас</a></li>
-                                <li><a href="schedule.html">Schedule</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li><a href="blog.html">Статьи</a>
-                                    <ul class="dropdown">
-                                        <li><a href="/all_posts">Статьи</a></li>
-                                        <li><a href="/editor">Написать статью</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contacts</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div id="mobile-menu-wrap"></div>
             </div>
+            <div class="nav-menu">
+                <nav class="mainmenu mobile-menu">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Магазин</a></li>
+                        <li><a href="/all_posts">Статьи</a>
+                            <ul class="dropdown">
+                                <li><a href="/all_posts">Статьи</a></li>
+                                <li><a href="/editor">Написать статью</a></li>
+                            </ul>
+                        </li>
+                        {% if current_user.is_authenticated %}
+                            <li>
+                                <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="/profile">Профиль</a></li>
+                                    <li><a href="#">Корзина</a></li>
+                                    <li><a href="/logout">Выйти</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="/log">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div id="mobile-menu-wrap"></div>
         </div>
     </header>
-</section>
     <!-- Header End -->
+</section>
 <div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'>
 
 </div>

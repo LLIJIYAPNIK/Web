@@ -12,6 +12,10 @@ def post(post_id):
     post_reaction = PostReactions.query.filter(PostReactions.post_id == post_id).all()
     post_reaction_user = PostReactions.query.filter(PostReactions.post_id == post_id,
                                                     PostReactions.user_id == current_user.id).first()
+    if post_reaction_user == None:
+        post_reaction_user = PostReactions(user_id=current_user.id, post_id=post_id, reaction_type='None')
+        db.session.add(post_reaction_user)
+        db.session.commit()
     if post:
         if not post_reaction:
             new_post_reaction = PostReactions(post_id=post_id, user_id=current_user.id, reaction_type='None')
