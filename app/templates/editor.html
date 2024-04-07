@@ -59,23 +59,33 @@
 
 <body>
 <!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Header Section Begin -->
-<header class="header-section">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="/static">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
-            </a>
-        </div>
-        <div>
-            <div class="nav-menu-right">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        {% if current_user.is_authenticated %}
+<section style="width: 100%">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+                </a>
+            </div>
+            <div class="conteiner">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="#">Магазин</a></li>
+                            <li><a href="/all_posts">Статьи</a>
+                                <ul class="dropdown">
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
+                                </ul>
+                            </li>
+                            {% if current_user.is_authenticated %}
                             <li>
                                 <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
                                 <ul class="dropdown">
@@ -84,34 +94,18 @@
                                     <li><a href="/logout">Выйти</a></li>
                                 </ul>
                             </li>
-                        {% else %}
+                            {% else %}
                             <li><a href="/log">Войти</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-            <div class="container">
-                <div class="nav-menu">
-                    <nav class="mainmenu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="/static">Главная</a></li>
-                            <li><a href="#">О нас</a></li>
-                            <li><a href="schedule.html">Schedule</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="blog.html">Статьи</a>
-                                <ul class="dropdown">
-                                    <li><a href="/all_posts">Статьи</a></li>
-                                    <li><a href="/editor">Написать статью</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contacts</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
-</header>
+    </header>
+    <!-- Header End -->
+</section>
 <!-- Header End -->
 
 <div style='height: 110px; width: 100%; background-image: url("../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>

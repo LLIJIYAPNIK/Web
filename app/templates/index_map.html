@@ -40,19 +40,20 @@
                     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
                 </a>
             </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        <li><a href="/">Главная</a></li>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Магазин</a></li>
-                        <li><a href="/all_posts">Статьи</a>
-                            <ul class="dropdown">
-                                <li><a href="/all_posts">Статьи</a></li>
-                                <li><a href="/editor">Написать статью</a></li>
-                            </ul>
-                        </li>
-                        {% if current_user.is_authenticated %}
+            <div class="conteiner">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="#">Магазин</a></li>
+                            <li><a href="/all_posts">Статьи</a>
+                                <ul class="dropdown">
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
+                                </ul>
+                            </li>
+                            {% if current_user.is_authenticated %}
                             <li>
                                 <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
                                 <ul class="dropdown">
@@ -61,11 +62,12 @@
                                     <li><a href="/logout">Выйти</a></li>
                                 </ul>
                             </li>
-                        {% else %}
+                            {% else %}
                             <li><a href="/log">Войти</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
