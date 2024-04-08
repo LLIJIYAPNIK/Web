@@ -20,4 +20,5 @@ login_manager = LoginManager(app)
 from . import get_nearst_gym
 from routes import main, article, editor, location, profile, search, user
 from admin import admin
-from routes.post import all, delete, edit, get, post, publish, reaction, update
+from routes.post import all_posts, delete, edit, get, post, publish, reaction, update
+from routes.shop import main, add_product
