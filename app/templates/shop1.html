@@ -99,10 +99,17 @@
                         </a>
                         <div class="product-descriprion">
                             <a class="product-name" href="product/{{ product.id }}" id="text">{{ product.name }}</a>
-                            <button class="button" onclick="addToCart({{ product.id }})">
-                                <img src="{{ url_for('static', filename='img/icons/shopping-cart.png') }}">
-                                <div class="button-text" style="width: auto">Купить</div>
-                            </button>
+                            {% if product.id in cart %}
+                                <button class="button" onclick="redirectToCart()">
+                                    <img src="{{ url_for('static', filename='img/icons/shopping-cart.png') }}">
+                                    <div class="button-text" style="width: auto">В корзине</div>
+                                </button>
+                            {% else %}
+                                <button class="button" onclick="addToCart(this)" data-product-id="{{ product.id }}">
+                                    <img src="{{ url_for('static', filename='img/icons/shopping-cart.png') }}">
+                                    <div class="button-text" style="width: auto">Купить</div>
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 </li>
@@ -112,10 +119,21 @@
 </section>
 
 <script>
-    function addToCart(productId) {
+    function addToCart(button) {
+        const productId = button.dataset.productId; // Получаем productId из data-атрибута
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "/add_to_cart");
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Изменяем текст кнопки на "В корзине"
+                button.querySelector(".button-text").textContent = "В корзине";
+                // Изменяем обработчик события onclick на перенаправление на страницу корзины
+                button.onclick = function() {
+                    window.location.href = "/cart";
+                };
+            }
+        };
         xhr.send(JSON.stringify({product_id: productId}));
     }
 </script>
@@ -131,6 +149,12 @@
             productName.textContent = truncatedText;
         }
     });
+</script>
+
+<script>
+    function redirectToCart() {
+        window.location.href = "{{ url_for('cart') }}";
+    }
 </script>
 
 
