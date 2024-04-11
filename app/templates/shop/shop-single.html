@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #151515;">
+
+<head>
+    <title>{{ product.name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/custom.css') }}" type="text/css">-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/templatemo.css') }}" type="text/css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/bootstrap.min.css') }}" type="text/css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/fontawesome.min.css') }}" type="text/css">-->
+
+    <!-- Slick -->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/slick-theme.css') }}" type="text/css">-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop/slick.min.css') }}" type="text/css">-->
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop1.css') }}" type="text/css">
+
+</head>
+
+<body style="background-color: #151515;">
+<!-- Start Top Nav -->
+<section style="width: 100%">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+                </a>
+            </div>
+            <div class="conteiner">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="/shop">Магазин</a></li>
+                            <li><a href="/all_posts">Статьи</a>
+                                <ul class="dropdown">
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
+                                </ul>
+                            </li>
+                            {% if current_user.is_authenticated %}
+                            <li>
+                                <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="/profile">Профиль</a></li>
+                                    <li><a href="/cart">Корзина</a></li>
+                                    <li><a href="/logout">Выйти</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li><a href="/log">Войти</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+</section>
+<div style='height: 110px; width: 100%; background-image: url("../../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
+<!-- Close Top Nav -->
+
+<!-- Open Content -->
+<section style="background-color: #151515;">
+    <div class="container pb-5" style="background-color: #151515;">
+        <div class="row" style="background-color: #151515;">
+            <div class="col-lg-5 mt-5" style="background-color: #151515;">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="{{ url_for('static', filename=product.image) }}"
+                         alt="Card image cap" id="product-detail">
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5" style="background-color: #151515;">
+                <div class="card" style="background-color: #151515; color: #fff;">
+                    <div class="card-body">
+                        <h1 class="h2" style="color: #fff;">{{ product.name }}</h1>
+                        <p class="h3 py-2">Цена: {{ product.price }}&nbsp;&#8381;</p>
+
+                        <h6>Description:</h6>
+                        <p>{{ product.description }}</p>
+
+                        <h6>Specification:</h6>
+                        <ul class="list-unstyled pb-3">
+                            <li>Калории: {{ product.calories }}</li>
+                            <li>Белки: {{ product.squirrels }}</li>
+                            <li>Жиры: {{ product.fats }}</li>
+                            <li>Углеводы: {{ product.carbohydrates }}</li>
+                        </ul>
+
+                        <form action="" method="GET" style="background-color: #151515;">
+                            <input type="hidden" name="product-title" value="Activewear">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <ul class="list-inline pb-3">
+                                        <li class="list-inline-item">
+                                            <button class="primary-btn" style="width: auto" id="decrement-button">
+                                                -
+                                            </button>
+                                        </li>
+                                        {% if product.id in cart %}
+                                            <li class="list-inline-item">
+                                                <input class="form-control" style="width: 150px; height: 45px; appearance: textfield;" id="var-value" value="{{ quantity }}" oninput="this.size = this.value.length;">
+                                            </li>
+                                        {% else %}
+                                            <li class="list-inline-item">
+                                                <input class="form-control" style="width: 150px; height: 45px; appearance: textfield;" id="var-value" value="1" oninput="this.size = this.value.length;">
+                                            </li>
+                                        {% endif %}
+                                        <li class="list-inline-item">
+                                            <button class="primary-btn" style="width: auto" id="increment-button">
+                                                +
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row pb-3" id="con_b">
+                                {% if product.id in cart %}
+                                    <button class="button" id="add_to_cart" onclick="add_to_cart_func()">
+                                        <div class="button-text" style="width: auto">В корзину</div>
+                                    </button>
+                                {% else %}
+                                    <button class="button" id="buy_btn" onclick="buy_func(event)">
+                                        <div class="button-text" style="width: auto">Купить</div>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+<div style="display: none" id="user_id">{{ user }}</div>
+<div style="display: none" id="product_id">{{ product.id }}</div>
+
+<script>
+    var input = document.getElementById("var-value");
+    var incrementButton = document.getElementById("increment-button");
+    var decrementButton = document.getElementById("decrement-button");
+    var add_to_cart = document.getElementById("add_to_cart");
+    var buy_btn = document.getElementById("buy_btn");
+
+    const quantity = document.getElementById("var-value").value;
+    const user_id = document.getElementById("user_id").value;
+    const product_id = document.getElementById("product_id").value;
+
+    incrementButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        input.value = parseInt(input.value) + 1;
+    });
+
+    decrementButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    });
+</script>
+
+<script>
+    function add_to_cart_func() {
+        const quantity = document.getElementById("var-value").value;
+        const user_id = document.getElementById("user_id").innerText;
+        const product_id = document.getElementById("product_id").innerText;
+
+        fetch('/add_to_cart_from_single', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                product_id: product_id,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Перенаправляем пользователя на страницу корзины
+            redirectToCart();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    function redirectToCart() {
+        window.location.href = '/cart'; // Замените '/cart' на URL вашей страницы корзины
+    }
+</script>
+
+<script>
+    function buy_func(event) {
+        event.preventDefault(); // Отменяем стандартное действие кнопки
+
+        const quantity = document.getElementById("var-value").value;
+        const user_id = document.getElementById("user_id").innerText;
+        const product_id = document.getElementById("product_id").innerText;
+
+        fetch('/just_buy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                product_id: product_id,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Перенаправляем пользователя на страницу корзины
+            change_btn(); // Передаем event в функцию change_btn()
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    function change_btn() {
+        var buy_btn = document.getElementById("buy_btn");
+        var con = document.getElementById("con_b")
+
+        con.innerHTML = ''
+        // buy_btn.innerHTML = ''
+        con.innerHTML = '<div class="row pb-3" id="con_b"><button class="button" id="add_to_cart" onclick="add_to_cart_func()">\n' +
+            '                                        В корзину' +
+            '                                    </button></div>';
+        buy_btn.removeEventListener("click", buy_func); // Удаляем обработчик события click
+    }
+</script>
+
+<!-- Start Script -->
+<script src="{{ url_for('static', filename='js/shop/custom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shop/templatemo.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shop/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shop/jquery-migrate-1.2.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shop/jquery-1.11.0.min.js') }}"></script>
+<!-- End Script -->
+
+<!-- Js Plugins -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

@@ -8,5 +8,5 @@ def edit_post(post_id):
     post = Posts.query.filter_by(id=post_id).first()
 
     if post:
-        return render_template('edit_post.html', post=post)
+        return render_template('post/edit_post.html', post=post)
     return "Post not found"

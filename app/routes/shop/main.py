@@ -10,4 +10,4 @@ def shop():
     products = Product.query.all()
     cart = Cart.query.filter_by(user_id=current_user.id).all()
     product_ids = [item.product_id for item in cart]
-    return render_template('shop1.html', products=products, cart=product_ids)
+    return render_template('shop/shop1.html', products=products, cart=product_ids)

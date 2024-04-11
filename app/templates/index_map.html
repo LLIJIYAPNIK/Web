@@ -7,7 +7,7 @@
     <meta name="keywords" content="Activitar, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Activitar | Template</title>
+    <title>Ближайшие залы</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
                         <ul>
                             <li><a href="/">Главная</a></li>
                             <li><a href="#">О нас</a></li>
-                            <li><a href="#">Магазин</a></li>
+                            <li><a href="/shop">Магазин</a></li>
                             <li><a href="/all_posts">Статьи</a>
                                 <ul class="dropdown">
                                     <li><a href="/all_posts">Статьи</a></li>
@@ -58,7 +58,7 @@
                                 <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
                                 <ul class="dropdown">
                                     <li><a href="/profile">Профиль</a></li>
-                                    <li><a href="#">Корзина</a></li>
+                                    <li><a href="/cart">Корзина</a></li>
                                     <li><a href="/logout">Выйти</a></li>
                                 </ul>
                             </li>
@@ -122,25 +122,25 @@
             <div class="col-md-4">
                 <div class="feature-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/feature/feature-1.jpg') }}">
-                    <h3>GROUP CLASSES</h3>
-                    <p>The Sopranos manages to address the biases<br/> and benefits of therapy</p>
-                    <a href="#" class="primary-btn f-btn">Read More</a>
+                    <h3>Групповые заятия</h3>
+                    <p>Разнообразие и индивидуальность</p>
+                    <a href="/group_classes" class="primary-btn f-btn">Подробнее</a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="feature-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/feature/feature-2.jpg') }}">
-                    <h3>PERSONAL TRAINING</h3>
-                    <p>Strep throat is very common during the flu<br/> seasons and it can be preceded</p>
-                    <a href="#" class="primary-btn f-btn">Read More</a>
+                    <h3>Персональные тренировки</h3>
+                    <p>Безопасность и профессионализм</p>
+                    <a href="/personal_training" class="primary-btn f-btn">Подробнее</a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="feature-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/feature/feature-3.jpg') }}">
-                    <h3>Sports Nutrition</h3>
-                    <p>A Human Being’s right to life implies his right to<br/> have the free and unrestricted</p>
-                    <a href="#" class="primary-btn f-btn">Read More</a>
+                    <h3>Самостоятельные тренировки</h3>
+                    <p>Самодисциплина и независимость</p>
+                    <a href="/independent_training" class="primary-btn f-btn">Подробнее</a>
                 </div>
             </div>
         </div>
@@ -154,13 +154,10 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="about-text">
-                    <h2>WELCOME TO CROSSFIT</h2>
-                    <p class="short-details">CrossFit is a cutting-edge functional fitness system that can help
-                        everyday men.</p>
-                    <p class="long-details">Success isn’t really that difficult. There is a significant portion of
-                        the population here in North America, that actually want and need success to be hard! For
-                        those of you who are serious about having more, doing more, giving more and being more.</p>
-                    <a href="#" class="primary-btn about-btn">Learn More</a>
+                    <h2>Приветствуем в crossfit</h2>
+                    <p class="short-details">CrossFit — это передовая функциональная фитнес-система, которая может помочь обычным мужчинам.</p>
+                    <p class="long-details">Добиться успеха на самом деле не так уж и сложно. Существует значительная часть населения, которая на самом деле хочет и требует, чтобы успех был трудным! Для тех из вас, кто серьезно настроен иметь больше, делать больше, отдавать больше и быть больше.</p>
+                    <a href="#" class="primary-btn about-btn">Узнать больше</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -180,9 +177,8 @@
             <div class="row">
                 <div class="col-lg-7 m-auto text-center">
                     <div class="section-title pl-lg-4 pr-lg-4 pl-0 pr-0">
-                        <h2>Choose Your Program</h2>
-                        <p>Our Crossfit experts can help you discover new training techniques and exercises that offer a
-                            dynamic and efficient full-body workout.</p>
+                        <h2>Выберите свою программу</h2>
+                        <p>Наши эксперты по кроссфиту помогут вам открыть для себя новые методы тренировок и упражнения, которые обеспечат динамичную и эффективную тренировку всего тела.</p>
                     </div>
                 </div>
             </div>
@@ -193,34 +189,33 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="classes-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/classes/class-1.jpg') }}">
-                    <h4>Crossfit Level 1</h4>
-                    <p>Sufferers around the globe will be happy to hear that there are sleep apnea remedies.</p>
-                    <a href="#" class="primary-btn class-btn">Read More</a>
+                    <h4>Crossfit УРОВЕНЬ 1</h4>
+                    <p>Страдающие по всему миру будут рады услышать, что существуют средства от апноэ во сне.</p>
+                    <a href="#" class="primary-btn class-btn">Узнать больше</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="classes-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/classes/class-2.jpg') }}">
-                    <h4>BootCamp</h4>
-                    <p>The oil, also called linseed oil, has many industrial uses – it is an important ingredient
-                    </p>
-                    <a href="#" class="primary-btn class-btn">Read More</a>
+                    <h4>УЧЕБНЫЙ ЛАГЕРЬ</h4>
+                    <p>Масло, также называемое льняным маслом, имеет множество промышленных применений — оно является важным ингредиентом.</p>
+                    <a href="#" class="primary-btn class-btn">Узнать больше</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="classes-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/classes/class-3.jpg') }}">
-                    <h4>Energy Blast</h4>
-                    <p>It is a very common occurrence like cold or fever depending upon your lifestyle. </p>
-                    <a href="#" class="primary-btn class-btn">Read More</a>
+                    <h4>ЭНЕРГЕТИЧЕСКИЙ ВЗРЫВ</h4>
+                    <p>Это очень распространенное явление, подобное простуде или лихорадке, в зависимости от вашего образа жизни.</p>
+                    <a href="#" class="primary-btn class-btn">Узнать больше</a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="classes-item set-bg"
                      data-setbg="{{ url_for('static', filename='img/classes/class-4.jpg') }}">
-                    <h4>CLASSIC BODY BALANCE</h4>
-                    <p>The procedure is usually a preferred alternative to photorefractive keratectomy,</p>
-                    <a href="#" class="primary-btn class-btn">Read More</a>
+                    <h4>КЛАССИЧЕСКИЙ БАЛАНС ТЕЛА</h4>
+                    <p>Эта процедура обычно является предпочтительной альтернативой фоторефракционной кератэктомии.</p>
+                    <a href="#" class="primary-btn class-btn">Узнать больше</a>
                 </div>
             </div>
         </div>
@@ -234,7 +229,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="section-title">
-                    <h2>Classtime Table</h2>
+                    <h2>Таблица кружков</h2>
                 </div>
             </div>
         </div>
@@ -242,12 +237,12 @@
             <div class="col-lg-12">
                 <div class="timetable-controls">
                     <ul>
-                        <li class="active" data-tsfilter="all">all class</li>
+                        <li class="active" data-tsfilter="all">все кружки</li>
                         <li data-tsfilter="crossfit">crossfit</li>
-                        <li data-tsfilter="lunge">lunge ball</li>
+                        <li data-tsfilter="lunge">мяч для выпадов</li>
                         <li data-tsfilter="ppsr">ppsr</li>
-                        <li data-tsfilter="walls">walls</li>
-                        <li data-tsfilter="candy">candy</li>
+                        <li data-tsfilter="walls">растяжка</li>
+                        <li data-tsfilter="candy">синди</li>
                     </ul>
                 </div>
             </div>
@@ -257,13 +252,13 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
+                    <th>понедельник</th>
+                    <th>вторник</th>
+                    <th>среда</th>
+                    <th>четверг</th>
+                    <th>пятница</th>
+                    <th>суббота</th>
+                    <th>воскресенье</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -271,22 +266,22 @@
                     <td class="workout-time">10.00</td>
                     <td class="hover-bg ts-item" data-tsmeta="crossfit">
                         <span>10.00 - 14.00</span>
-                        <h6>Crossfit lv1</h6>
+                        <h6>Crossfit ур1</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="crossfit">
                         <span>10.00 - 15.00</span>
-                        <h6>Crossfit lv1</h6>
+                        <h6>Crossfit ур1</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="lunge">
                         <span>10.00 - 13.00</span>
-                        <h6>Lunge Ball Bur</h6>
+                        <h6>мяч для выпадов</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="lunge">
                         <span>10.00 - 13.30</span>
-                        <h6>Lunge Ball Bur</h6>
+                        <h6>мяч для выпадов</h6>
                     </td>
                 </tr>
                 <tr>
@@ -294,17 +289,17 @@
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="lunge">
                         <span>14.00 - 17.00</span>
-                        <h6>Lunge Ball Bur</h6>
+                        <h6>мяч для выпадов</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="crossfit">
                         <span>14.00 - 17.00</span>
-                        <h6>Crossfit lv1</h6>
+                        <h6>Crossfit ур1</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="walls">
                         <span>14.00 - 15.30</span>
-                        <h6>Walls to Knees</h6>
+                        <h6>растяжка</h6>
                     </td>
                     <td></td>
                 </tr>
@@ -312,17 +307,17 @@
                     <td class="workout-time">16.00</td>
                     <td class="hover-bg ts-item" data-tsmeta="lunge">
                         <span>16.00 - 18.00</span>
-                        <h6>Lunge Ball Bur</h6>
+                        <h6>мяч для выпадов</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="candy">
                         <span>16.00 - 19.00</span>
-                        <h6>Candy</h6>
+                        <h6>Синди</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="candy">
                         <span>16.00 - 19.00</span>
-                        <h6>Candy</h6>
+                        <h6>Синди</h6>
                     </td>
                     <td class="hover-bg ts-item" data-tsmeta="ppsr">
                         <span>16.00 - 17.00</span>
@@ -337,7 +332,7 @@
                     <td class="workout-time">18.00</td>
                     <td class="hover-bg ts-item" data-tsmeta="walls">
                         <span>18.00 - 20.00</span>
-                        <h6>Walls to Knees</h6>
+                        <h6>растяжка</h6>
                     </td>
                     <td class="hover-bg ts-item" data-tsmeta="ppsr">
                         <span>18.00 - 20.00</span>
@@ -359,25 +354,25 @@
                     <td class="workout-time">20.00</td>
                     <td class="hover-bg ts-item" data-tsmeta="lunge">
                         <span>21.00 - 23.00</span>
-                        <h6>Lunge Ball Bur</h6>
+                        <h6>мяч для выпадов</h6>
                     </td>
                     <td class="hover-bg ts-item" data-tsmeta="walls">
                         <span>20.00 - 22.00</span>
-                        <h6>Walls to Knees</h6>
+                        <h6>растяжка</h6>
                     </td>
                     <td class="hover-bg ts-item" data-tsmeta="walls">
                         <span>20.30 - 23.00</span>
-                        <h6>Walls to Knees</h6>
+                        <h6>растяжка</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="crossfit">
                         <span>22.00 - 23.00</span>
-                        <h6>Crossfit Lv2</h6>
+                        <h6>Crossfit ур2</h6>
                     </td>
                     <td></td>
                     <td class="hover-bg ts-item" data-tsmeta="crossfit">
                         <span>21.00 - 23.00</span>
-                        <h6>Crossfit Lv2</h6>
+                        <h6>Crossfit ур2</h6>
                     </td>
                 </tr>
                 </tbody>

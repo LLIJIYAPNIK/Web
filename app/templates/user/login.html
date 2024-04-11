@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+    <link rel="stylesheet" href="../../static/css/login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <img src="../../static/img/logo.png" alt="" style="margin: 50px 0 0 50px">
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 30px;">Вход</h1>
+        <form method="post" class="log_elements">
+            {{ form.hidden_tag() }}
+            {{ form.mail.label }}<br>
+            {{ form.mail }}<br>
+            <br>
+            {{ form.password.label }}<br>
+            {{ form.password }}<br>
+            <br>
+            {{ form.submit }}
+        </form>
+        <div class="container_1">
+            <p style="margin: 0">Ещё нет аккаунта?</p>
+            <a href="/register" class="link_1">Нажмите, чтобы зарегистрироваться</a>
+        </div>
+    </div>
+</body>
+</html>

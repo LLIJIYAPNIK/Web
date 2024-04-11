@@ -12,7 +12,7 @@ def product(product_id):
     product_ids = [item.product_id for item in cart]
     quantity = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
     if quantity == None:
-        return render_template("shop-single.html", product=product, cart=product_ids, user=current_user.id)
+        return render_template("shop/shop-single.html", product=product, cart=product_ids, user=current_user.id)
     else:
-        return render_template("shop-single.html", product=product, cart=product_ids, quantity=quantity.quantity,
+        return render_template("shop/shop-single.html", product=product, cart=product_ids, quantity=quantity.quantity,
                                user=current_user.id)

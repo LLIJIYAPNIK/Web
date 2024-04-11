@@ -26,7 +26,7 @@ def post(post_id):
             dislikes_count = PostReactions.query.filter(PostReactions.post_id == post_id,
                                                         PostReactions.reaction_type == 'dislike').count()
             user_position = 'None'
-            return render_template('post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
+            return render_template('post/post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
                                    user_position=user_position)
         if post_reaction_user.reaction_type == 'like':
             likes_count = PostReactions.query.filter(PostReactions.post_id == post_id,
@@ -35,7 +35,7 @@ def post(post_id):
                                                         PostReactions.reaction_type == 'dislike').count()
             user_position = 'like'
             print(likes_count, dislikes_count)
-            return render_template('post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
+            return render_template('post/post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
                                    user_position=user_position)
         if post_reaction_user.reaction_type == 'dislike':
             likes_count = PostReactions.query.filter(PostReactions.post_id == post_id,
@@ -44,7 +44,7 @@ def post(post_id):
                                                         PostReactions.reaction_type == 'dislike').count()
             user_position = 'dislike'
             print(likes_count, dislikes_count)
-            return render_template('post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
+            return render_template('post/post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
                                    user_position=user_position)
         if post_reaction_user.reaction_type == 'None':
             likes_count = PostReactions.query.filter(PostReactions.post_id == post_id,
@@ -53,6 +53,6 @@ def post(post_id):
                                                         PostReactions.reaction_type == 'dislike').count()
             user_position = 'None'
             print(likes_count, dislikes_count)
-            return render_template('post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
+            return render_template('post/post.html', post=post, likes_count=likes_count, dislikes_count=dislikes_count,
                                    user_position=user_position)
     return "Post not found"

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Корзина</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/slicknav.min.css') }}" type="text/css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/shop1.css') }}" type="text/css">-->
+
+
+    <!-- build:css assets/css/app.min.css -->
+    <!--== Leaflet Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/leaflet.min.css') }}" type="text/css">
+    <!--== Nice Select Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/nice-select.min.css') }}" type="text/css">
+    <!--== Slick Slider Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/slick.min.css') }}" type="text/css">
+    <!--== Magnific Popup Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/magnific-popup.min.css') }}" type="text/css">
+    <!--== Slicknav Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/slicknav.min.css') }}" type="text/css">
+    <!--== Animate Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/animate.min.css') }}" type="text/css">
+    <!--== Ionicons Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/ionicons.min.css') }}" type="text/css">
+    <!--== Font-Awesome Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/font-awesome.min.css') }}" type="text/css">
+    <!--== Bootstrap Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/bootstrap.min.css') }}" type="text/css">
+
+    <!--== Main Style CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/style.css') }}" type="text/css">
+    <!--== Helper Min CSS ==-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart/helper.min.css') }}" type="text/css">
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+</head>
+
+<body style="background-color: #151515;">
+
+<!--== Start Header Area ==-->
+<section style="width: 100%">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+                </a>
+            </div>
+            <div class="conteiner">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="/shop">Магазин</a></li>
+                            <li><a href="/all_posts">Статьи</a>
+                                <ul class="dropdown">
+                                    <li><a href="/all_posts">Статьи</a></li>
+                                    <li><a href="/editor">Написать статью</a></li>
+                                </ul>
+                            </li>
+                            {% if current_user.is_authenticated %}
+                            <li>
+                                <a href="/profile">{{ current_user.name }} {{ current_user.last_name }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="/profile">Профиль</a></li>
+                                    <li><a href="/cart">Корзина</a></li>
+                                    <li><a href="/logout">Выйти</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li><a href="/log">Войти</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+</section>
+<div style='height: 110px; width: 100%; background-image: url("../../static/img/classes-title-bg-grey.jpg"); z-index: 10'></div>
+
+{% if life == True %}
+    <!--== Start Page Content Wrapper ==-->
+    <div class="page-content-wrapper sp-y">
+        <div class="cart-page-content-wrap">
+            <div class="container container-wide">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="shopping-cart-list-area">
+                            <div class="shopping-cart-table table-responsive">
+                                <table class="table table-bordered text-center mb-0" style="border: none;">
+                                    <thead>
+                                    <tr>
+                                        <th style="color: white;">Товары</th>
+                                        <th style="color: white;">Цена</th>
+                                        <th style="color: white;">Кол-во</th>
+                                        <th style="color: white;">Всего</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for i in range(cart_length) %}
+                                    <tr style="color: white;">
+                                        <td class="product-list">
+                                            <div class="cart-product-item d-flex align-items-center">
+                                                <div class="remove-icon">
+                                                    <button class="remove-button"
+                                                            data-product-id="{{ cart[i].product.id }}"><i
+                                                            class="fa fa-trash-o" style="color: white;"></i></button>
+                                                </div>
+                                                <a href="single-product.html" class="product-thumb">
+                                                    <img src="{{ url_for('static', filename=cart[i].product.image) }}">
+                                                </a>
+                                                <a href="product/{{ cart[i].product.id }}" class="product-name"
+                                                   style="color: white; font-size: 16px;">{{ cart[i].product.name }}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="price">{{ cart[i].product.price }}&nbsp;&#8381;</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline pb-3">
+                                                <li class="list-inline-item">
+                                                    <button class="primary-btn decrement-button" data-index="{{ i }}"
+                                                            data-product-id="{{ cart[i].product.id }}"
+                                                            data-product-name="{{ cart[i].product.name }}"
+                                                            style="width: auto">-
+                                                    </button>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <input class="form-control var-value" data-index="{{ i }}"
+                                                           data-product-id="{{ cart[i].product.id }}"
+                                                           data-product-name="{{ cart[i].product.name }}"
+                                                           value="{{ cart[i].quantity }}"
+                                                           style="width: 75px; height: 45px;">
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <button class="primary-btn increment-button" data-index="{{ i }}"
+                                                            data-product-id="{{ cart[i].product.id }}"
+                                                            data-product-name="{{ cart[i].product.name }}"
+                                                            style="width: auto;">+
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <span class="price total-price" data-product-id="{{ cart[i].product.id }}"
+                                                  id="{{ i }}">{{ cart[i].quantity * cart[i].product.price }}&nbsp;&#8381;</span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="cart-coupon-update-area d-sm-flex justify-content-between align-items-center">
+                                <div class="cart-update-buttons mt-15 mt-sm-0">
+                                    <button class="btn-clear-cart" style="color: white;" onclick="clear_cart()">Очистить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Cart Calculate Area -->
+                        <div class="cart-calculate-area mt-sm-40 mt-md-60" style="background-color: #AAA;">
+                            <h5 class="cal-title">Подробнее</h5>
+                            <div class="cart-cal-table table-responsive">
+                                <table class="table table-borderless">
+                                    <tr class="order-total">
+                                        <th>Всего</th>
+                                        <td><b><span id="cart-total">{{ total }}&nbsp;&#8381;</span></b></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="proceed-checkout-btn">
+                                <a href="#" class="primary-btn">Перейти к оформлению</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Page Content Wrapper ==-->
+
+    <!-- Scroll Top Button -->
+    <button class="btn-scroll-top"><i class="ion-chevron-up"></i></button>
+{% else %}
+    <section style="margin-top: 100px;"><h1 style="text-align: center; vertical-align: middle; color: #fff;">Здесь пока ничего нет. Скорее за покупками!</h1></section>
+{% endif %}
+
+<script>
+    $(document).ready(function () {
+        $('.remove-button').on('click', function () {
+            var productId = $(this).data('product-id'); // Получаем идентификатор продукта из дата-атрибута
+
+            $.ajax({
+                url: '/remove_from_cart',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ product_id: productId }), // Исправленное название свойства
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    // Обработка ошибки
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("increment-button") || event.target.classList.contains("decrement-button")) {
+            handleButtonClick(event);
+        }
+    });
+
+    document.addEventListener("input", function (event) {
+        if (event.target.classList.contains("var-value")) {
+            handleInputChange(event);
+        }
+    });
+
+    function handleButtonClick(event) {
+        var index = event.target.getAttribute('data-index');
+        var input = document.querySelector('input.var-value[data-index="' + index + '"]');
+
+        var productId = event.target.getAttribute('data-product-id');
+
+        if (event.target.classList.contains("increment-button")) {
+            input.value = parseInt(input.value) + 1;
+        } else {
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        sendAjaxRequest(productId, input.value, index);
+    }
+
+    function handleInputChange(event) {
+        var index = event.target.getAttribute('data-index');
+        var productId = event.target.getAttribute('data-product-id');
+        var quantity = event.target.value;
+
+        sendAjaxRequest(productId, quantity, index);
+    }
+
+    function sendAjaxRequest(productId, quantity, index) {
+        var data = {
+            product_id: productId,
+            quantity: quantity
+        };
+
+        $.ajax({
+            url: '/update_cart',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                var total = document.getElementById("cart-total");
+                var total_for_product = document.getElementById(index);
+
+                total_for_product.textContent = response["total_for_product"];
+                total.textContent = response["total"];
+            }
+        });
+    }
+</script>
+
+<script>
+    function clear_cart() {
+        $.ajax({
+            url: '/clear_cart',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+</script>
+
+<!--=======================Javascript============================-->
+<!-- build:js assets/js/app.min.js -->
+<!--=== Modernizr Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/modernizr-3.6.0.min.js') }}"></script>
+<!--=== jQuery Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/jquery-3.3.1.min.js') }}"></script>
+<!--=== jQuery Migration Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/jquery-migrate-1.2.1.min.js') }}"></script>
+<!--=== Popper Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/popper.min.js') }}"></script>
+<!--=== Bootstrap Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/bootstrap.min.js') }}"></script>
+<!--=== Slicknav Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/jquery.slicknav.min.js') }}"></script>
+<!--=== Magnific Popup Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/jquery.magnific-popup.min.js') }}"></script>
+<!--=== Slick Slider Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/slick.min.js') }}"></script>
+<!--=== Nice Select Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/jquery.nice-select.min.js') }}"></script>
+<!--=== Leaflet Min Js ===-->
+<script src="{{ url_for('static', filename='js/cart/leaflet.min.js') }}"></script>
+<!--=== Countdown Js ===-->
+<script src="{{ url_for('static', filename='js/cart/countdown.js') }}"></script>
+
+<!--=== Active Js ===-->
+<script src="{{ url_for('static', filename='js/cart/active.js') }}"></script>
+<!-- endbuild -->
+
+<!-- Js Plugins -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

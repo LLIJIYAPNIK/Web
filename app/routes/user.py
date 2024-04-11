@@ -31,7 +31,7 @@ def login():
 
         flash('Invalid email or password', 'error')
 
-    return render_template('login.html', form=form)
+    return render_template('user/login.html', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -65,7 +65,7 @@ def register():
                 db.session.rollback()
                 flash('An error occurred. Please try again.', 'error')
 
-    return render_template('register.html', form=form)
+    return render_template('user/register.html', form=form)
 
 
 @app.route('/logout')

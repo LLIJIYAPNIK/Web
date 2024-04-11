@@ -191,6 +191,7 @@ ol {
 	border-radius: 4px;
 }
 
+
 .primary-btn:after {
 	color: #fff;
 	-webkit-transition-duration: 500ms;
@@ -390,7 +391,12 @@ ol {
 }
 
 .nav-menu {
-	text-align: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 100%;
+	bottom: 27px;
 }
 
 .nav-menu .nado {
@@ -409,7 +415,11 @@ ol {
 }
 
 .nav-menu .mainmenu ul li:last-child {
-	margin-right: 0;
+	margin-right: 0px;
+}
+
+.nav-menu .mainmenu ul {
+	margin-left: 0px;
 }
 
 .nav-menu .mainmenu ul li.active a {
@@ -3045,6 +3055,7 @@ ol {
 		padding-right: 0;
 	}
 	.nav-menu {
+		display: inline-block;
 		text-align: right;
 	}
 	.nav-menu .mainmenu ul li {
@@ -3102,8 +3113,11 @@ ol {
 		padding: 0;
 	}
 	.slicknav_btn {
+		position: relative;
+		bottom: 29px;
 		margin: 0;
 		border-radius: 0;
+
 	}
 	.header-normal .slicknav_btn {
 		margin: 37px 0;
@@ -3197,6 +3211,7 @@ ol {
 		margin-bottom: 10px;
 	}
 	.slicknav_btn {
+		bottom: 0px;
 		float: none;
 		display: inline-block;
 	}

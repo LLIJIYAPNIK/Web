@@ -17,5 +17,5 @@ def all_posts():
         if posts.has_prev else None
     this_url = url_for('all_posts', page=posts.page)
 
-    return render_template('all_posts.html', posts=posts, next_url=next_url, prev_url=prev_url, this_url=this_url,
+    return render_template('post/all_posts.html', posts=posts, next_url=next_url, prev_url=prev_url, this_url=this_url,
                            page=page, threshold=3, total_pages=(query.count() - 1) // app.config['POSTS_PER_PAGE'] + 1)

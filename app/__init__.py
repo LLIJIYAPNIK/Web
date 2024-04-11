@@ -18,7 +18,12 @@ search.init_app(app)
 login_manager = LoginManager(app)
 
 from . import get_nearst_gym
-from routes import main, article, editor, location, profile, search, user
+from routes import main, editor, location, profile, user
+from .routes.post import search
+from .routes import article
 from admin import admin
 from routes.post import all_posts, delete, edit, get, post, publish, reaction, update
-from routes.shop import main, add_product, cart, product
+from routes.shop import main, product
+from routes.shop.add import add_to_cart, add_to_cart_from_single, just_buy
+from routes.shop.cart import cart, clear_cart, remove_from_cart, update_cart
+from routes.errors import e_404
