@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Ошибка авторизации</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" type="text/css">
+    <style>
+        .a404 {
+            padding-top: 225px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 150px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .a404 {
+                font-size: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="a404">Ошибка авторизации</h1>
+    <h2 class="b404">Эта страница только для авторизованных пользователей</h2>
+    <h3 class="b404"><a href="/log">Войдите</a> или <a href="/register">зарегистрируйтесь</a></h3>
+</div>
+</body>
