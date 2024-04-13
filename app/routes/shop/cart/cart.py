@@ -1,10 +1,11 @@
 from flask import render_template
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app import app
 from app.models.cart import Cart
 
 
 @app.route('/cart')
+@login_required
 def cart():
     user_id = current_user.id
 

@@ -1,11 +1,12 @@
 from flask import Flask, render_template
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app.models.cart import Cart
 from app.models.product import Product
 from app import app
 
 
 @app.route('/shop')
+@login_required
 def shop():
     products = Product.query.all()
     cart = Cart.query.filter_by(user_id=current_user.id).all()
