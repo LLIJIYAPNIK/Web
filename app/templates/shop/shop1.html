@@ -100,15 +100,15 @@
                         <div class="product-descriprion">
                             <a class="product-name" href="product/{{ product.id }}" id="text">{{ product.name }}</a>
                             {% if product.id in cart %}
-                                <button class="button" onclick="redirectToCart()">
+                                <div class="button" onclick="redirectToCart()">
                                     <img src="{{ url_for('static', filename='img/icons/shopping-cart.png') }}">
                                     <div class="button-text" style="width: auto">В корзине</div>
-                                </button>
+                                </div>
                             {% else %}
-                                <button class="button" onclick="addToCart(this)" data-product-id="{{ product.id }}">
+                                <div class="button" onclick="addToCart(this)" data-product-id="{{ product.id }}">
                                     <img src="{{ url_for('static', filename='img/icons/shopping-cart.png') }}">
                                     <div class="button-text" style="width: auto">Купить</div>
-                                </button>
+                                </div>
                             {% endif %}
                         </div>
                     </div>
@@ -201,6 +201,5 @@
 <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-
 
 </html>

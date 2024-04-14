@@ -87,6 +87,7 @@ html {
 
 .product {
 	display: block;
+    border: 1px solid #000;
 	border-radius: 3px;
 	position: relative;
 	background: #303030;
@@ -139,7 +140,7 @@ html {
 	font-size: 1em;
 	line-height: 1.4em;
 	height: 5.6em;
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .product-descriprion {
@@ -147,6 +148,7 @@ html {
     width: 80%;
     color: white;
     margin-bottom: 20px;
+    padding-top: 15px;
 }
 
 .product-name {
@@ -154,6 +156,8 @@ html {
     margin-top: 15px;
     margin-bottom: 15px;
     color: crimson;
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: bold;
 }
 
 .button {
@@ -190,5 +194,4 @@ html {
     margin-left: 5%;;
     margin-top: 0.32em;
     font-size: 15px;
-    border: none;
 }
