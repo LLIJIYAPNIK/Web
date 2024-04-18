@@ -6,4 +6,4 @@ class Config(object):
     SESSION_COOKIE_DOMAIN = None  # Используйте домен по умолчанию
     SESSION_COOKIE_PATH = '/'
     SESSION_TYPE = 'filesystem'  # Можно выбрать другие типы хранения сессий
-    POSTS_PER_PAGE = 1
+    POSTS_PER_PAGE = 10

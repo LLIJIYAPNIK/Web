@@ -8,4 +8,4 @@ from app import app
 def editor():
     userID = session.get('userID')
     print(userID)
-    return render_template('editor.html', userID=userID)
+    return render_template('post/editor.html', userID=userID)

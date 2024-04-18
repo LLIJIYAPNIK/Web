@@ -18,7 +18,7 @@ search.init_app(app)
 login_manager = LoginManager(app)
 
 from . import get_nearst_gym
-from routes import main, editor, location, profile, user
+from routes import main, editor, location, profile, user, about_us
 from .routes.post import search
 from .routes import article
 from admin import admin
