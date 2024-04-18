@@ -1,9 +1,11 @@
+# Импорт необходимых модулей и классов
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email
 from wtforms.validators import EqualTo
 
 
+# Форма для регистрации
 class RegistrationForm(FlaskForm):
     name = StringField('Имя', validators=[DataRequired()])
     last_name = StringField('Фамилия', validators=[DataRequired()])
@@ -11,3 +13,4 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     copy_password = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Зарегистрироваться')
+    

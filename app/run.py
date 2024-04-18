@@ -1,5 +1,7 @@
+# Импорт необходимых модулей и классов
 from app import app, db
 
+# Запуск
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()

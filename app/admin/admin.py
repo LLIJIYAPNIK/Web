@@ -1,3 +1,4 @@
+# Импорт необходимых модулей и классов
 from flask_admin import Admin
 from app.models.user import User
 from app.models.post import Posts
@@ -14,7 +15,10 @@ from app.admin.user import UserView
 from app.admin.cart import CartView
 from app.admin.products import ProductView
 
-admin = Admin(app, template_mode='bootstrap3', index_view = DashboardView())
+# Создание объекта Admin с указанием шаблонов и представления DashboardView в качестве индексной страницы
+admin = Admin(app, template_mode='bootstrap3', index_view=DashboardView())
+
+# Добавление представлений для моделей User, Posts, PostReactions, Gyms, Product и Cart в админ-панель
 admin.add_view(UserView(User, db.session))
 admin.add_view(PostsView(Posts, db.session))
 admin.add_view(PostReactionsView(PostReactions, db.session))
