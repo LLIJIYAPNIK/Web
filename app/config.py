@@ -7,4 +7,3 @@ class Config(object):
     SESSION_COOKIE_PATH = '/'
     SESSION_TYPE = 'filesystem'  # Можно выбрать другие типы хранения сессий
     POSTS_PER_PAGE = 10
-    
